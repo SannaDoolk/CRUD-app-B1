@@ -1,7 +1,7 @@
 {
-  "name": "exercise-pure-approval",
+  "name": "assignment-b1-crud-snippets",
   "version": "1.0.0",
-  "description": "1DV026 - Exercise - Pure Approval",
+  "description": "1DV026 - Assignment B1",
   "type": "module",
   "main": "src/server.js",
   "scripts": {
@@ -10,9 +10,9 @@
     "lint": "npx eslint ./src || exit 0",
     "lint:fix": "npx eslint ./src --fix || exit 0"
   },
-  "repository": "git@gitlab.lnu.se:1dv026/content/exercises/module-b/exercise-pure-approval.git",
+  "repository": "git@gitlab.lnu.se:1dv026/student/sd222si/assignment-b1-crud-snippets.git",
   "contributors": [
-    "Mats Loock <mats.loock@lnu.se>"
+    "Sanna Doolk <sd221@lnu.se>"
   ],
   "license": "MIT",
   "private": true,
