@@ -18,9 +18,9 @@ const app = express()
 
 // Get the directory name of this module's path.
 const directoryFullName = dirname(fileURLToPath(import.meta.url))
-
+// Morgan
 app.use(logger('dev'))
-
+// View Engine
 app.engine('hbs', hbs.express4({
   defaultLayout: join(directoryFullName, 'views', 'layouts', 'default'),
   partialsDir: join(directoryFullName, 'views', 'partials')
@@ -29,7 +29,7 @@ app.set('view engine', 'hbs')
 app.set('views', join(directoryFullName), 'views')
 
 app.use(express.urlencoded({ extended: false }))
-
+// Static files
 app.use(express.static(join(directoryFullName, '..', 'public')))
 
 app.listen(process.env.PORT, () => {

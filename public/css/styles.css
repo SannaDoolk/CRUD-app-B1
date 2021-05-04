@@ -1,0 +1,28 @@
+body {
+  background-color: rgb(232, 217, 221);
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  margin: 20px;
+}
+
+h1 {
+  font-size: 50px;
+  margin: 40px 0px;
+}
+
+a {
+  text-decoration: none;
+  color: rgb(0, 0, 0);
+  background-color: rgb(199, 195, 190);
+  padding: 10px 20px;
+  margin: 25px 0px;
+  font-size: 20px;
+}
+
+#app-links a {
+  background-color: rgb(199, 195, 190);
+  padding: 20px 35px;
+  margin: 25px, 0px;
+  text-align: center;
+  display: inline-block;
+  font-size: 40px;
+}
