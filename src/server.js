@@ -12,6 +12,7 @@ import hbs from 'express-hbs'
 import logger from 'morgan'
 import { dirname, join } from 'path'
 import { fileURLToPath } from 'url'
+import { router } from './routes/router.js'
 
 // Create express application
 const app = express()
@@ -26,11 +27,14 @@ app.engine('hbs', hbs.express4({
   partialsDir: join(directoryFullName, 'views', 'partials')
 }))
 app.set('view engine', 'hbs')
-app.set('views', join(directoryFullName), 'views')
+app.set('views', join(directoryFullName, 'views'))
 
 app.use(express.urlencoded({ extended: false }))
+
 // Static files
 app.use(express.static(join(directoryFullName, '..', 'public')))
+
+app.use('/', router)
 
 app.listen(process.env.PORT, () => {
   console.log(`Server running at http://localhost:${process.env.PORT}`)
