@@ -17,6 +17,17 @@ export class CrudController {
  */
   index (req, res) {
     res.render('crud/index')
-    console.log()
+  }
+
+  logIn (req, res) {
+    res.render('crud/log-in')
+  }
+
+  register (req, res) {
+    res.render('crud/register')
+  }
+
+  createNew (req, res) {
+    res.render('crud/create')
   }
 }

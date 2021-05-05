@@ -6,3 +6,6 @@ export const router = express.Router()
 const controller = new CrudController()
 
 router.get('/', controller.index)
+router.get('/log-in', controller.logIn)
+router.get('/register', controller.register)
+router.get('/create-new', controller.createNew)
