@@ -18,15 +18,15 @@ export class CrudController {
 
   // GLÖM EJ GÖRA ASYNC
   index (req, res) {
-    res.render('crud/index')
+    res.render('home/index')
   }
   
   logIn (req, res) {
-    res.render('crud/log-in')
+    res.render('login/log-in')
   }
 
   register (req, res) {
-    res.render('crud/register')
+    res.render('register/register')
   }
 
   createNew (req, res) {
