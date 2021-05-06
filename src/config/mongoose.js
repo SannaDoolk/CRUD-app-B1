@@ -7,6 +7,11 @@
 
 import mongoose from 'mongoose'
 
+/**
+ * Starts a connection to a database.
+ *
+ * @returns { Promise } resolves if the connection is successfull.
+ */
 export const connectDB = async () => {
   mongoose.connection.on('connected', () => console.log('Mongoose connection open.'))
   mongoose.connection.on('error', err => console.error(`Mongose error has occurred: ${err}`))
