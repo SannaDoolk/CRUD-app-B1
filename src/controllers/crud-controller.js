@@ -55,22 +55,24 @@ export class CrudController {
     res.render('crud/delete')
   }
 
-  newUser (req, res) {
-    const user = new User({
-      username: req.body.username,
-      password: req.body.password
-    })
-    // save in database
-    user.save(function (err) {
-      if (err) {
-        console.log(err)
-      } else {
-        console.log('saved')
+  async newUser (req, res) {
+    try {
+      const user = new User({
+        username: req.body.username,
+        password: req.body.password
+      })
+      // save in database
+      await user.save()
+
+      req.session.flash = {
+        type: 'success', text: 'You have been registered, please log in'
       }
-    })
-    req.session.flash = {
-      type: 'success', text: 'You have been registered, please log in'
+      res.redirect('log-in')
+    } catch (error) {
+      res.render('register/register', {
+        validationErrors: [error.errors.password.message]
+      })
+      console.log(error.errors.password.message)
     }
-    res.redirect('log-in')
   }
 }

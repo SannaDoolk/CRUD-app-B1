@@ -64,7 +64,6 @@ async function main () {
       res.locals.flash = req.session.flash
       delete req.session.flash
     }
-
     next()
   })
 

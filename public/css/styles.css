@@ -56,10 +56,18 @@ input[type=text], input[type=password] {
 }
 
 #flash-messages {
-  background-color: black;
-  color: rgb(199, 195, 190);
+  background-color: rgb(147, 171, 147);
+  color: black;
   font-family: 'Courier New', Courier, monospace;
   padding: 20px;
+}
+
+#validation {
+  color: black;
+  background-color: rgb(227, 119, 119);
+  font-family: 'Courier New', Courier, monospace;
+  padding: 20px;
+  list-style: none;
 }
 
 
