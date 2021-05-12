@@ -1,10 +1,8 @@
 <h2>Register an account</h2>
 <div id="log-in-page">
-<form id="log-in-form">
-  <label for="u-name">Enter a username</label><br>
-  <input type="text" id="u-name" name="u-name"><br>
-  <label for="p-word">Enter a password</label><br>
-  <input type="password" id="p-word" name="p-word">
+<form id="log-in-form" method="post" action="/new-register">
+  <input name="username" type="text" placeholder="Enter a username"><br>
+  <input name="password" type="password" placeholder="Enter a password">
   <input type="submit" value="Register">
 </form>
 </div>

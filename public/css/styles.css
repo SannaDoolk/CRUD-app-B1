@@ -55,4 +55,11 @@ input[type=text], input[type=password] {
   display: block;
 }
 
+#flash-messages {
+  background-color: black;
+  color: rgb(199, 195, 190);
+  font-family: 'Courier New', Courier, monospace;
+  padding: 20px;
+}
+
 

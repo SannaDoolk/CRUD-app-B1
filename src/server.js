@@ -7,8 +7,8 @@
 
 import express from 'express'
 import hbs from 'express-hbs'
-// import session from 'express-session'
-// import helmet from 'helmet'
+import session from 'express-session'
+import helmet from 'helmet'
 import logger from 'morgan'
 import { dirname, join } from 'path'
 import { fileURLToPath } from 'url'
@@ -23,6 +23,8 @@ async function main () {
 
 // Get the directory name of this module's path.
   const directoryFullName = dirname(fileURLToPath(import.meta.url))
+
+  app.use(helmet())
 // Morgan
   app.use(logger('dev'))
 // View Engine
@@ -37,6 +39,34 @@ async function main () {
 
 // Static files
   app.use(express.static(join(directoryFullName, '..', 'public')))
+
+  const sessionOptions = {
+    name: process.env.SESSION_NAME,
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+      httpOnly: true,
+      maxAge: 1000 * 60 * 60 * 24,
+      sameSite: 'lax'
+    }
+  }
+
+  if (app.get('env') === 'production') {
+    app.set('trust proxy', 1)
+    sessionOptions.cookie.secure = true
+  }
+
+  app.use(session(sessionOptions))
+
+  app.use((req, res, next) => {
+    if (req.session.flash) {
+      res.locals.flash = req.session.flash
+      delete req.session.flash
+    }
+
+    next()
+  })
 
   app.use('/', router)
 
