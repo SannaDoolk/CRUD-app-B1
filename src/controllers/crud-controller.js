@@ -70,9 +70,13 @@ export class CrudController {
       res.redirect('log-in')
     } catch (error) {
       res.render('register/register', {
-        validationErrors: [error.errors.password.message]
+        validationErrors: [error.errors.message]
       })
-      console.log(error.errors.password.message)
     }
+  }
+
+  logInUser (req, res) {
+    console.log(req.body.password)
+    res.render('login/user-page')
   }
 }

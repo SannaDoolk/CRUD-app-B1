@@ -7,6 +7,7 @@ const controller = new CrudController()
 
 router.get('/', controller.index)
 router.get('/log-in', controller.logIn)
+router.post('/user-page', controller.logInUser)
 router.get('/register', controller.register)
 router.post('/new-register', controller.newUser)
 router.get('/create-new', controller.createNew)

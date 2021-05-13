@@ -1,10 +1,8 @@
 <h2>Log in</h2>
 <div id="log-in-page">
-<form id="log-in-form">
-  <label for="u-name">Username</label><br>
-  <input type="text" id="u-name" name="u-name"><br>
-  <label for="p-word">Password</label><br>
-  <input type="password" id="p-word" name="p-word">
+<form id="log-in-form" method="post" action="/user-page">
+  <input name="username" type="text" placeholder="Enter your username"><br>
+  <input name="password" type="password" placeholder="Enter your password">
   <input type="submit" value="Log in">
 </form>
 </div>

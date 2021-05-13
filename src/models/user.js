@@ -12,13 +12,16 @@ const UserSchema = new mongoose.Schema({
   username: {
     type: String,
     required: true,
+    minlength: [1, 'A username is required'],
+    maxlength: [25, 'The username must not contain more than 25 characters.'],
     unique: true,
     trim: true
   },
   password: {
     type: String,
     minlength: [10, 'The password must contain at least 10 characters.'],
-    required: true
+    maxlength: [1000, 'The password must not contain more than 1000 characters.'],
+    required: [true, 'A password is required']
   }
 })
 
