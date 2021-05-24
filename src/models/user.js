@@ -8,7 +8,7 @@
 import mongoose from 'mongoose'
 import bcryptjs from 'bcryptjs'
 
-const UserSchema = new mongoose.Schema({
+const userSchema = new mongoose.Schema({
   username: {
     type: String,
     required: true,
@@ -25,9 +25,24 @@ const UserSchema = new mongoose.Schema({
   }
 })
 
-UserSchema.pre('save', async function () {
+userSchema.pre('save', async function () {
   this.password = await bcryptjs.hash(this.password, 8)
   console.log('hashed')
 })
 
-export const User = mongoose.model('User', UserSchema)
+/**
+ * 
+ * @param 
+ * @param
+ */
+userSchema.statics.authenticate = async function (username, password) {
+  const user = await this.findOne({ username })
+  if (!user || !(await bcryptjs.compare(password, user.password))) {
+    console.log('error with login')
+  } else {
+    console.log('login success')
+  }
+  return user
+}
+
+export const User = mongoose.model('User', userSchema)

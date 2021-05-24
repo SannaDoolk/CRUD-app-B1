@@ -75,8 +75,13 @@ export class CrudController {
     }
   }
 
-  logInUser (req, res) {
-    console.log(req.body.password)
-    res.render('login/user-page')
+  async logInUser (req, res) {
+    try {
+      const user = await User.authenticate(req.body.username, req.body.password)
+
+      res.render('login/user-page')
+    } catch (err) {
+      console.log(err)
+    }
   }
 }
