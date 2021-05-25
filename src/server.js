@@ -71,8 +71,20 @@ async function main () {
 
   app.use(function (err, req, res, next) {
     if (err.status === 404) {
-      res.status(404).sendFile(join(directoryFullName, 'views', 'errors', '404.html'))
+      res
+        .status(404)
+        .sendFile(join(directoryFullName, 'views', 'errors', '404.html'))
     }
+
+    if (req.app.get('env') !== 'development') {
+      return res
+        .status(500)
+        .sendFile(join(directoryFullName, 'views', 'errors', '500.html'))
+    }
+
+    res
+      .status(err.status || 500)
+      .render('errors/error', { error: err })
   })
 
   app.listen(process.env.PORT, () => {

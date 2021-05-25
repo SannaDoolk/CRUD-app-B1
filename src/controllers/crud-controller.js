@@ -71,17 +71,35 @@ export class CrudController {
     } catch (error) {
       res.render('register/register', {
         validationErrors: [error.errors.message]
+        //fixa felmeddelande
       })
     }
   }
 
-  async logInUser (req, res) {
+  async logInUser (req, res, next) {
     try {
       const user = await User.authenticate(req.body.username, req.body.password)
-
-      res.render('login/user-page')
-    } catch (err) {
-      console.log(err)
+      req.session.regenerate(() => {
+        req.session.loggedIn = true
+        res.render('login/user-page') // render, redirect?
+      })
+    } catch (error) {
+      res.render('login/log-in')
+      //fixa felmeddelande
     }
+  }
+
+  userPage (req, res) {
+    console.log('access')
+      res.render('login/user')
+  }
+
+  authorize (req, res, next) {
+    if (!req.session.loggedIn) {
+      const error = new Error('Forbidden')
+      error.statusCode = 403
+      return next(error)
+    }
+    next()
   }
 }
