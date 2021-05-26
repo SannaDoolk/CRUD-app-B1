@@ -71,16 +71,21 @@ export class CrudController {
     } catch (error) {
       res.render('register/register', {
         validationErrors: [error.errors.message]
+
         //fixa felmeddelande
       })
     }
   }
 
-  async logInUser (req, res, next) {
+  async authenticate (req, res, next) {
     try {
       const user = await User.authenticate(req.body.username, req.body.password)
+
       req.session.regenerate(() => {
         req.session.loggedIn = true
+        req.session.userId = user._id
+        req.session.username = user.username
+
         res.render('login/user-page') // render, redirect?
       })
     } catch (error) {
@@ -90,15 +95,14 @@ export class CrudController {
   }
 
   userPage (req, res) {
-    console.log('access')
-      res.render('login/user')
+      res.render('login/user-page')
   }
 
   authorize (req, res, next) {
     if (!req.session.loggedIn) {
       const error = new Error('Forbidden')
-      error.statusCode = 403
-      return next(error)
+      error.status = 403
+      return next(error) // fixa html
     }
     next()
   }

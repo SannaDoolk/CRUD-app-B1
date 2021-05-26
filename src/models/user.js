@@ -11,10 +11,10 @@ import bcryptjs from 'bcryptjs'
 const userSchema = new mongoose.Schema({
   username: {
     type: String,
-    required: true,
+    required: [true, 'A username is required'],
     minlength: [1, 'A username is required'],
     maxlength: [25, 'The username must not contain more than 25 characters.'],
-    unique: true,
+    unique: [true, 'Username already taken'],
     trim: true
   },
   password: {
