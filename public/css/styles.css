@@ -71,4 +71,27 @@ input[type=text], input[type=password] {
   list-style: none;
 }
 
+#create input[type=submit] {
+  padding: 10px 20px;
+  border: 3px solid black;
+  margin-top: 20px;
+  border-radius: 3px;
+  font-size: 20px;
+  display: block;
+}
+
+#create input[type=text] {
+  padding: 10px 20px;
+  margin-bottom: 15px;
+  margin-top: 5px;
+}
+
+#snippet-body {
+ height: 100px;
+}
+
+#snippet-description {
+  height: 100px;
+}
+
 
