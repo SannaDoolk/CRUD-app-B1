@@ -6,6 +6,7 @@
  */
 
 import { User } from '../models/user.js'
+import { CodeSnippet } from '../models/codeSnippet.js'
 
 /**
  *
@@ -26,17 +27,17 @@ export class CrudController {
   }
 
   // Visa login-sida
-  logIn (req, res) {
+  logInPage (req, res) {
     res.render('login/log-in')
   }
 
   // Visa register-sida
-  register (req, res) {
+  registerPage (req, res) {
     res.render('register/register')
   }
 
   // Visa skapa-ny-sida
-  createNew (req, res) {
+  create (req, res) {
     res.render('crud/create')
   }
 
@@ -55,12 +56,37 @@ export class CrudController {
     res.render('crud/delete')
   }
 
-  async newUser (req, res) {
+  createSnippet (req, res, next) {
+    try {
+      const codeSnippet = new CodeSnippet({
+        owner: req.session.username,
+        title: req.body.snippetTitle,
+        description: req.body.snippetDescription
+      })
+      console.log(codeSnippet.owner)
+
+      req.session.flash = {
+        type: 'success', text: 'Code snippet has been added'
+      }
+      res.render('crud/create')
+    } catch (error) {
+      console.log(error.message)
+      res.render('register/register', {
+        validationErrors: [error.errors.message]
+
+        //fixa felmeddelande
+      })
+    }
+  }
+
+
+    /*async newUser (req, res) {
     try {
       const user = new User({
         username: req.body.username,
         password: req.body.password
       })
+
       // save in database
       await user.save()
 
@@ -75,9 +101,9 @@ export class CrudController {
         //fixa felmeddelande
       })
     }
-  }
+  }*/
 
-  async authenticate (req, res, next) {
+  /*async authenticate (req, res, next) {
     try {
       const user = await User.authenticate(req.body.username, req.body.password)
 
@@ -92,10 +118,17 @@ export class CrudController {
       res.render('login/log-in')
       //fixa felmeddelande
     }
+  }*/
+
+  /*userPage (req, res) {
+      res.render('login/user-page')
   }
 
-  userPage (req, res) {
-      res.render('login/user-page')
+  logout (req, res) {
+    console.log(req.session)
+    req.session.destroy()
+    console.log(req.session)
+    res.redirect('/log-in')
   }
 
   authorize (req, res, next) {
@@ -105,5 +138,5 @@ export class CrudController {
       return next(error) // fixa html
     }
     next()
-  }
+  }*/
 }

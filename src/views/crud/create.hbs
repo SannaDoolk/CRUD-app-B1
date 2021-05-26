@@ -1,14 +1,14 @@
 <h3>Create a new snippet</h3>
 <div id="create">
-<form id="create-form" method="post" action="">
-  <label for="name">Name</label><br>
-  <input name="snippet-name" type="text" id="snippet-name" placeholder="Name"><br>
-  <label for="prefix">Prefix</label><br>
-  <input name="snippet-prefix" type="text" id="snippet-prefix" placeholder="Prefix"><br>
-  <label for="body">Body</label><br>
-  <input name="snippet-body" type="text" id="snippet-body" placeholder="Body"><br>
-  <label for="desc">Description</label><br>
-  <input name="snippet-description" type="text" id="snippet-description" placeholder="Description">
+<form id="create-form" method="post" action="/create-new">
+
+  <label for="snippetTitle">Title</label>
+  <input name="snippetTitle" type="text" id="snippet-tile"><br>
+
+  <label for="snippet-description">Description</label>
+  <textarea id="snippet-description" name="snippetDescription" rows="4" cols="50">
+  </textarea>
+
   <input type="submit" value="Create">
 </form>
 </div>

@@ -7,23 +7,25 @@
 
 import mongoose from 'mongoose'
 
-const codeSnippet = new mongoose.Schema({
-  name: {
+const codeSnippetSchema = new mongoose.Schema({
+  owner: {
+    type: String,
+    required: true
+  },
+
+  title: {
     type: String,
     required: true,
     minlength: [1, 'You have to provide a name for your code snippet.'],
     maxlength: [100, 'That name is a bit too long.']
   },
 
-  prefix: {
-    type: String
-  },
-
-  body: {
-    type: String
-  },
-
   description: {
-    type: String
+    type: String,
+    required: true,
+    minlength: [1, 'You have to write a description.'],
+    maxlength: [4000, 'You have provided too much text.']
   }
 })
+
+export const CodeSnippet = mongoose.model('CodeSnippet', codeSnippetSchema)
