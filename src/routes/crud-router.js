@@ -9,14 +9,13 @@ const userController = new UserController()
 
 router.get('/', crudController.index)
 router.get('/log-in', crudController.logInPage) // login page
-//router.post('/user-page', crudController.authenticate)
 router.get('/register', crudController.registerPage) // register page
-//router.post('/new-register', crudController.newUser)
-router.get('/create', crudController.create)
+router.get('/create', userController.authorize, crudController.create)
 router.get('/read', crudController.read)
-router.get('/update', crudController.update)
-router.get('/delete', crudController.delete)
-router.post('/create-new', crudController.createSnippet)
+router.get('/update', userController.authorize, crudController.update)
+router.get('/delete', userController.authorize, crudController.delete)
+
+router.post('/create-new', crudController.createSnippet) // authorize
 
 router.post('/logout', userController.logout)
 router.get('/user-page', userController.authorize, userController.userPage)

@@ -42,8 +42,17 @@ export class CrudController {
   }
 
   // Visa tillagt content
-  read (req, res) {
-    res.render('crud/read')
+  async read (req, res) {
+    try {
+      const viewData = {
+        codeSnippets: (await CodeSnippet.find({})).map(codeSnippet => ({
+          title: codeSnippet.title
+        }))
+      }
+      res.render('crud/read', { viewData })
+    } catch (error) {
+      console.log('error in read')
+    }
   }
 
   // Visa updatera-sida
@@ -56,26 +65,32 @@ export class CrudController {
     res.render('crud/delete')
   }
 
-  createSnippet (req, res, next) {
+  async createSnippet (req, res, next) {
     try {
       const codeSnippet = new CodeSnippet({
         owner: req.session.username,
         title: req.body.snippetTitle,
         description: req.body.snippetDescription
       })
-      console.log(codeSnippet.owner)
 
-      req.session.flash = {
-        type: 'success', text: 'Code snippet has been added'
+      if (req.session.username) {
+        await codeSnippet.save()
+
+        req.session.flash = {
+          type: 'success', text: 'Code snippet has been added'
+        }
+        res.redirect('./create')
+
+        console.log('saved code snippet')
+      } else {
+        console.log('no session')
       }
-      res.render('crud/create')
     } catch (error) {
       console.log(error.message)
-      res.render('register/register', {
-        validationErrors: [error.errors.message]
+      req.session.flash = { type: 'danger', text: error.errors.message }
+      res.redirect('./create')
 
         //fixa felmeddelande
-      })
     }
   }
 
