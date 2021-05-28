@@ -12,11 +12,13 @@ router.get('/log-in', crudController.logInPage) // login page
 router.get('/register', crudController.registerPage) // register page
 router.get('/create', userController.authorize, crudController.create)
 router.get('/read', crudController.read)
-router.get('/update', userController.authorize, crudController.update)
-router.get('/delete', userController.authorize, crudController.delete)
+router.get('/:id/edit', crudController.edit) // edit page
+router.post('/:id/update', crudController.update) // the actual update
+
+//router.get('/delete', userController.authorize, crudController.delete)
 router.post('/create-new', crudController.createSnippet) // authorize
 router.get('/:id', crudController.getSnippetById)
-router.get('/:id/remove', crudController.remove)
+//router.get('/:id/remove', crudController.remove)
 router.post('/:id/delete', crudController.delete)
 
 router.post('/logout', userController.logout)

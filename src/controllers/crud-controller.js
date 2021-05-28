@@ -57,8 +57,30 @@ export class CrudController {
   }
 
   // Visa updatera-sida
-  update (req, res) {
-    res.render('crud/update')
+  async edit (req, res) {
+    try {
+      const id = req.params.id
+      const codeSnippet = await CodeSnippet.findById(id)
+      const viewData = {
+        title: codeSnippet.title,
+        description: codeSnippet.description,
+        id: id
+      }
+      res.render('crud/edit', { viewData })
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  async update (req, res) {
+    try {
+      const update = await CodeSnippet.updateOne({ _id: req.body.id }, {
+        description: req.body.description
+      })
+      res.redirect('../read')
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   async remove (req, res) {

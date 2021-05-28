@@ -1,0 +1,11 @@
+<h3>{{viewData.title}}</h3>
+<a href="../{{viewData.id}}/update">hej</a>
+
+<form method="post" action="../{{viewData.id}}/update">
+<input type="hidden" name="id" value="{{viewData.id}}" />
+<input type="text" class="form-control" name="description" placeholder="Update task description here" value="{{viewData.description}}" required="required" autofocus="autofocus" />
+
+<input type="submit" value="Update">
+</form>
+
+ 
