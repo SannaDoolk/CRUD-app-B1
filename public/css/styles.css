@@ -19,6 +19,10 @@ a {
   font-size: 20px;
 }
 
+li {
+  list-style: none;
+}
+
 #app-links a {
   background-color: rgb(199, 195, 190);
   padding: 20px 35px;
@@ -87,6 +91,10 @@ label {
 
 #create input[type="text"] {
   border: 0.5px solid black;
+}
+
+#code-snippets {
+  font-size: 25px;
 }
 
 
