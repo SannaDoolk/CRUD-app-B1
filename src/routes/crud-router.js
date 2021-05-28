@@ -15,7 +15,8 @@ router.get('/read', crudController.read)
 router.get('/update', userController.authorize, crudController.update)
 router.get('/delete', userController.authorize, crudController.delete)
 router.post('/create-new', crudController.createSnippet) // authorize
-router.get('/:id', crudController.getId)
+router.get('/:id', crudController.getSnippetById)
+router.get('/:id/remove', crudController.remove)
 router.post('/:id/delete', crudController.delete)
 
 router.post('/logout', userController.logout)

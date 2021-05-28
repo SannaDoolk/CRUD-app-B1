@@ -61,13 +61,29 @@ export class CrudController {
     res.render('crud/update')
   }
 
-  // Visa delete-sida
+  async remove (req, res) {
+    try {
+    console.log(req.params.id)
+
+    const codeSnippet = await CodeSnippet.findOne({ _id: req.params.id })
+    console.log(codeSnippet._id)
+    const viewData = {
+      id: codeSnippet._id,
+      description: codeSnippet.description
+    }
+
+    res.render('crud/remove', { viewData })
+    } catch (error) {
+      console.log(error)
+    } 
+  }
+
   async delete (req, res) {
     try {
-      console.log(req.body.id)
+      console.log('delete ' + req.body.id)
       await CodeSnippet.deleteOne({ _id: req.body.id })
       req.session.flash = { type: 'success', text: 'Code snippet was deleted' }
-      res.redirect('./create')
+      res.redirect('../read')
     } catch (error) {
       console.log(error)
     }
@@ -104,13 +120,14 @@ export class CrudController {
     }
   }
 
-  async getId (req, res) {
+  async getSnippetById (req, res) {
     try {
       const id = req.params.id
       const codeSnippet = await CodeSnippet.findById(id)
       const viewData = {
         title: codeSnippet.title,
-        description: codeSnippet.description
+        description: codeSnippet.description,
+        id: id
       }
       res.render('crud/details', { viewData })
     } catch (error) {

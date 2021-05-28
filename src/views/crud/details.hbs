@@ -1,3 +1,11 @@
 <b>{{viewData.title}} </b>
 <br>
 {{viewData.description}}
+{{viewData.id}}
+
+<form method="post" action="./{{viewData.id}}/delete">
+<input type="hidden" name="id" value="{{viewData.id}}" />
+<input type="submit" value="Delete">
+</form>
+
+<a href="./{{viewData.id}}/remove"></a>
