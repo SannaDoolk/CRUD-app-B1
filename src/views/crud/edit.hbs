@@ -1,9 +1,11 @@
 <h3>{{viewData.title}}</h3>
-<a href="../{{viewData.id}}/update">hej</a>
 
 <form method="post" action="../{{viewData.id}}/update">
 <input type="hidden" name="id" value="{{viewData.id}}" />
-<input type="text" class="form-control" name="description" placeholder="Update task description here" value="{{viewData.description}}" required="required" autofocus="autofocus" />
+
+<textarea id="snippet-description" name="description" value="{{viewData.description}}" rows="4" cols="50">
+  {{viewData.description}}
+  </textarea>
 
 <input type="submit" value="Update">
 </form>

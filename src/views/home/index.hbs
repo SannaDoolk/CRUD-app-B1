@@ -3,5 +3,22 @@
 <a href="/log-in">Log in</a>
 <a href="/register">Register</a>
 </div>
+
+<div id="snippets-container">
+  <div id="code-snippets">
+    {{#if viewData.codeSnippets.length}}
+    <ul>
+      {{#each viewData.codeSnippets}}
+        <a href="./{{this.id}}">
+        {{this.title}}
+      </a>
+      <br>
+      {{/each}}
+    </ul>
+      {{else}}
+        <p>No code snippets added yet.</p>
+    {{/if}}
+</div>
+</div>
 </body>
 </html>

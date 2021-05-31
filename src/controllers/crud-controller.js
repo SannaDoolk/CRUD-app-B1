@@ -22,8 +22,18 @@ export class CrudController {
   // GLÖM EJ GÖRA ASYNC
 
   // Visa home
-  index (req, res) {
-    res.render('home/index')
+  async index (req, res) {
+    try {
+      const viewData = {
+        codeSnippets: (await CodeSnippet.find({})).map(codeSnippet => ({
+          title: codeSnippet.title,
+          id: codeSnippet._id
+        }))
+      }
+      res.render('home/index', { viewData })
+    } catch (error) {
+      console.log('error')
+    }
   }
 
   // Visa login-sida
