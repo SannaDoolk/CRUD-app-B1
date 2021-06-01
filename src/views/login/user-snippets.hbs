@@ -1,0 +1,14 @@
+<div id="user-snippets">
+    {{#if viewData.codeSnippets.length}}
+    <ul>
+      {{#each viewData.codeSnippets}}
+        <a href="./{{this.id}}">
+        {{this.title}}
+      </a>
+      <br>
+      {{/each}}
+    </ul>
+      {{else}}
+        <p>You haven't created any code snippets yet.</p>
+    {{/if}}
+  </div>

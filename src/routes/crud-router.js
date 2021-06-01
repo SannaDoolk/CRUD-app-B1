@@ -12,6 +12,29 @@ router.get('/log-in', crudController.logInPage) // login page
 router.get('/register', crudController.registerPage) // register page
 router.get('/create', userController.authorize, crudController.create)
 router.get('/read', crudController.read)
+
+//router.get('/delete', userController.authorize, crudController.delete)
+router.post('/create-new', crudController.createSnippet) // authorize
+
+router.post('/logout', userController.logout)
+//router.get('/user-home', userController.authorize, userController.userPage)
+router.post('/login-user', userController.authenticate)
+router.get('/user-snippets', userController.userSnippets)
+router.post('/new-register', userController.newUser)
+router.get('/user-home', userController.userHome)
+
+router.post('/:id/delete', crudController.delete)
+router.get('/:id/edit', crudController.edit) // edit page
+router.post('/:id/update', crudController.update) // the actual update
+router.get('/:id', crudController.getSnippetById)
+
+
+
+/*router.get('/', crudController.index)
+router.get('/log-in', crudController.logInPage) // login page
+router.get('/register', crudController.registerPage) // register page
+router.get('/create', userController.authorize, crudController.create)
+router.get('/read', crudController.read)
 router.get('/:id/edit', crudController.edit) // edit page
 router.post('/:id/update', crudController.update) // the actual update
 
@@ -22,6 +45,7 @@ router.get('/:id', crudController.getSnippetById)
 router.post('/:id/delete', crudController.delete)
 
 router.post('/logout', userController.logout)
-router.get('/user-page', userController.authorize, userController.userPage)
-router.post('/user-page', userController.authenticate)
-router.post('/new-register', userController.newUser)
+router.get('/user-home', userController.userPage)
+
+router.post('/login-user', userController.authenticate)
+router.post('/new-register', userController.newUser)*/

@@ -1,5 +1,6 @@
 
 import { User } from '../models/user.js'
+import { CodeSnippet } from '../models/codeSnippet.js'
 
 /**
  *
@@ -20,7 +21,6 @@ export class UserController {
         username: req.body.username,
         password: req.body.password
       })
-
     // save in database
       await user.save()
 
@@ -29,7 +29,7 @@ export class UserController {
       }
       res.redirect('log-in')
     } catch (error) {
-      res.render('register/register', {
+      res.redirect('../register', {
         validationErrors: [error.errors.message]
 
       //fixa felmeddelande
@@ -37,14 +37,8 @@ export class UserController {
     }
   }
 
-    userPage (req, res) {
-    res.render('login/user-page')
-  }
-
     logout (req, res) {
-    console.log(req.session)
     req.session.destroy()
-    console.log(req.session)
     res.redirect('/log-in')
   }
 
@@ -59,18 +53,42 @@ export class UserController {
 
   async authenticate (req, res, next) {
     try {
+      console.log('auth')
       const user = await User.authenticate(req.body.username, req.body.password)
-
+      console.log('auth 2')
       req.session.regenerate(() => {
         req.session.loggedIn = true
         req.session.userId = user._id
         req.session.username = user.username
 
-        res.render('login/user-page') // render, redirect?
+        res.redirect('user-home')
       })
     } catch (error) {
-      res.render('login/log-in')
+      console.log('ERRRO IN AUTH')
+      res.redirect('../log-in')
       //fixa felmeddelande
+    }
+  }
+
+  userHome (req, res, next) {
+    res.render('login/user-home')
+  }
+
+  async userSnippets (req, res, next) {
+    try {
+      const user = req.session.username
+
+      const viewData = {
+        codeSnippets: (await CodeSnippet.find({ owner: user })).map(codeSnippet => ({
+          title: codeSnippet.title,
+          id: codeSnippet._id,
+          description: codeSnippet.description,
+          owner: codeSnippet.owner
+        }))
+      }
+      res.render('login/user-snippets', { viewData })
+    } catch (error) {
+
     }
   }
 }

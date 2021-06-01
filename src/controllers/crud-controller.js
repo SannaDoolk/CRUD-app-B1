@@ -22,7 +22,7 @@ export class CrudController {
   // GLÖM EJ GÖRA ASYNC
 
   // Visa home
-  async index (req, res) {
+  async index (req, res, next) {
     try {
       const viewData = {
         codeSnippets: (await CodeSnippet.find({})).map(codeSnippet => ({
@@ -32,7 +32,8 @@ export class CrudController {
       }
       res.render('home/index', { viewData })
     } catch (error) {
-      console.log('error')
+      res.redirect('..')
+      console.log('error in index')
     }
   }
 
@@ -52,7 +53,7 @@ export class CrudController {
   }
 
   // Visa tillagt content
-  async read (req, res) {
+  async read (req, res, next) {
     try {
       const viewData = {
         codeSnippets: (await CodeSnippet.find({})).map(codeSnippet => ({
@@ -67,7 +68,7 @@ export class CrudController {
   }
 
   // Visa updatera-sida
-  async edit (req, res) {
+  async edit (req, res, next) {
     try {
       const id = req.params.id
       const codeSnippet = await CodeSnippet.findById(id)
@@ -82,7 +83,7 @@ export class CrudController {
     }
   }
 
-  async update (req, res) {
+  async update (req, res, next) {
     try {
       const update = await CodeSnippet.updateOne({ _id: req.body.id }, {
         description: req.body.description
@@ -93,7 +94,7 @@ export class CrudController {
     }
   }
 
-  async remove (req, res) {
+  async remove (req, res, next) {
     try {
     console.log(req.params.id)
 
@@ -110,12 +111,13 @@ export class CrudController {
     } 
   }
 
-  async delete (req, res) {
+  async delete (req, res, next) {
     try {
       console.log('delete ' + req.body.id)
       await CodeSnippet.deleteOne({ _id: req.body.id })
       req.session.flash = { type: 'success', text: 'Code snippet was deleted' }
       res.redirect('../read')
+ 
     } catch (error) {
       console.log(error)
     }
@@ -128,8 +130,6 @@ export class CrudController {
         title: req.body.snippetTitle,
         description: req.body.snippetDescription
       })
-
-      console.log(codeSnippet)
 
       if (req.session.username) {
         await codeSnippet.save()
@@ -152,18 +152,21 @@ export class CrudController {
     }
   }
 
-  async getSnippetById (req, res) {
+  async getSnippetById (req, res, next) {
     try {
-      const id = req.params.id
-      const codeSnippet = await CodeSnippet.findById(id)
+      console.log('param ' + req.params.id)
+      //const id = req.params.id
+      const codeSnippet = await CodeSnippet.findOne({ _id: req.params.id })
+      //const codeSnippet = await CodeSnippet.findById(id)
       const viewData = {
         title: codeSnippet.title,
         description: codeSnippet.description,
-        id: id
+        id: codeSnippet._id
       }
       res.render('crud/details', { viewData })
     } catch (error) {
-      console.log(error)
+      res.redirect('..')
+      console.log('ERROR IN GETSNIPID')
     }
   }
 
