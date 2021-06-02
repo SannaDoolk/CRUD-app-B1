@@ -49,6 +49,7 @@ export class CrudController {
 
   // Visa skapa-ny-sida
   create (req, res) {
+    console.log('in create')
     res.render('crud/create')
   }
 

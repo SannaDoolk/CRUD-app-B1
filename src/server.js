@@ -67,6 +67,7 @@ async function main () {
       delete req.session.flash
     }
 
+    res.locals.username = req.session.username
     res.locals.baseURL = baseURL
     next()
   })

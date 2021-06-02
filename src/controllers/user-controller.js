@@ -39,18 +39,27 @@ export class UserController {
   }
 
     logout (req, res) {
+      console.log('logged out')
     req.session.destroy()
-    res.redirect('/log-in')
+    res.redirect('..')
   }
 
-  // Kollar om session cookie finns 
-  authorize (req, res, next) {
-    if (!req.session.loggedIn) {
-      const error = new Error('Forbidden')
-      error.status = 403
-      return next(error) // fixa html
+  async authorize (req, res, next) {
+    try {
+      console.log('in authorize')
+      console.log(req.params.id)
+      console.log(req.session.username)
+      const codeSnippet = await CodeSnippet.findOne({ _id: req.params.id })
+      if (req.session.username !== codeSnippet.owner) {
+        const error = new Error('Forbidden')
+        error.status = 403
+        return next(error) // fixa html
+      }
+
+      next()
+    } catch (error) {
+
     }
-    next()
   }
 
  // Kollar om username och password matchar och genererar session cookie
