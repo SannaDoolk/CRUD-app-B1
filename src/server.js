@@ -24,6 +24,8 @@ async function main () {
 // Get the directory name of this module's path.
   const directoryFullName = dirname(fileURLToPath(import.meta.url))
 
+  const baseURL = process.env.BASE_URL || '/'
+
   app.use(helmet())
 // Morgan
   app.use(logger('dev'))
@@ -64,6 +66,8 @@ async function main () {
       res.locals.flash = req.session.flash
       delete req.session.flash
     }
+
+    res.locals.baseURL = baseURL
     next()
   })
 

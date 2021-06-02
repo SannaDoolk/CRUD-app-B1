@@ -22,7 +22,7 @@ export class CrudController {
   // GLÖM EJ GÖRA ASYNC
 
   // Visa home
-  async index (req, res, next) {
+  /*async index (req, res, next) {
     try {
       const viewData = {
         codeSnippets: (await CodeSnippet.find({})).map(codeSnippet => ({
@@ -35,7 +35,7 @@ export class CrudController {
       res.redirect('..')
       console.log('error in index')
     }
-  }
+  }*/
 
   // Visa login-sida
   logInPage (req, res) {

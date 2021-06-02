@@ -17,6 +17,7 @@ export class UserController {
 
     async newUser (req, res) {
     try {
+      console.log('register user')
       const user = new User({
         username: req.body.username,
         password: req.body.password
@@ -27,9 +28,9 @@ export class UserController {
       req.session.flash = {
         type: 'success', text: 'You have been registered, please log in'
       }
-      res.redirect('log-in')
+      res.redirect('../login/log-in')
     } catch (error) {
-      res.redirect('../register', {
+      res.redirect('../login/register', {
         validationErrors: [error.errors.message]
 
       //fixa felmeddelande
@@ -42,6 +43,7 @@ export class UserController {
     res.redirect('/log-in')
   }
 
+  // Kollar om session cookie finns 
   authorize (req, res, next) {
     if (!req.session.loggedIn) {
       const error = new Error('Forbidden')
@@ -51,17 +53,17 @@ export class UserController {
     next()
   }
 
+ // Kollar om username och password matchar och genererar session cookie
   async authenticate (req, res, next) {
     try {
       console.log('auth')
       const user = await User.authenticate(req.body.username, req.body.password)
-      console.log('auth 2')
       req.session.regenerate(() => {
         req.session.loggedIn = true
         req.session.userId = user._id
         req.session.username = user.username
 
-        res.redirect('user-home')
+        res.redirect('../login/user-home')
       })
     } catch (error) {
       console.log('ERRRO IN AUTH')
@@ -76,19 +78,33 @@ export class UserController {
 
   async userSnippets (req, res, next) {
     try {
-      const user = req.session.username
-
-      const viewData = {
-        codeSnippets: (await CodeSnippet.find({ owner: user })).map(codeSnippet => ({
-          title: codeSnippet.title,
-          id: codeSnippet._id,
-          description: codeSnippet.description,
-          owner: codeSnippet.owner
-        }))
+      if (req.session.username) {
+        const user = req.session.username
+        const viewData = {
+          codeSnippets: (await CodeSnippet.find({ owner: user })).map(codeSnippet => ({
+            title: codeSnippet.title,
+            id: codeSnippet._id,
+            description: codeSnippet.description,
+            owner: codeSnippet.owner
+          }))
+        }
+        res.render('login/user-snippets', { viewData })
+      } else {
+        console.log('no user logged in')
+        res.redirect('log-in')
       }
-      res.render('login/user-snippets', { viewData })
     } catch (error) {
 
     }
+  }
+
+  // Visa login-sida
+    logInPage (req, res) {
+    res.render('login/log-in')
+  }
+
+  // Visa register-sida
+    registerPage (req, res) {
+    res.render('login/register')
   }
 }

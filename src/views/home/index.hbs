@@ -1,15 +1,16 @@
 <body>
+<!--
 <div id="container">
 <a href="/log-in">Log in</a>
 <a href="/register">Register</a>
 </div>
-
+-->
 <div id="snippets-container">
   <div id="code-snippets">
     {{#if viewData.codeSnippets.length}}
     <ul>
       {{#each viewData.codeSnippets}}
-        <a href="./{{this.id}}">
+        <a href="crud/{{this.id}}">
         {{this.title}}
       </a>
       <br>
@@ -19,6 +20,7 @@
         <p>No code snippets added yet.</p>
     {{/if}}
 </div>
+
 </div>
 </body>
 </html>

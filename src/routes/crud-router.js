@@ -7,45 +7,46 @@ export const router = express.Router()
 const crudController = new CrudController()
 const userController = new UserController()
 
-router.get('/', crudController.index)
-router.get('/log-in', crudController.logInPage) // login page
-router.get('/register', crudController.registerPage) // register page
-router.get('/create', userController.authorize, crudController.create)
-router.get('/read', crudController.read)
+// create form to write in, CRUD
+router.get('/create', (req, res, next) => crudController.create(req, res, next))
 
-//router.get('/delete', userController.authorize, crudController.delete)
-router.post('/create-new', crudController.createSnippet) // authorize
+// all documents, CRUD
+router.get('/read', (req, res, next) => crudController.read(req, res, next))
 
-router.post('/logout', userController.logout)
-//router.get('/user-home', userController.authorize, userController.userPage)
-router.post('/login-user', userController.authenticate)
-router.get('/user-snippets', userController.userSnippets)
-router.post('/new-register', userController.newUser)
-router.get('/user-home', userController.userHome)
+// post a created snippet,CRUD
+router.post('/create-new', (req, res, next) => crudController.createSnippet)
 
-router.post('/:id/delete', crudController.delete)
-router.get('/:id/edit', crudController.edit) // edit page
-router.post('/:id/update', crudController.update) // the actual update
-router.get('/:id', crudController.getSnippetById)
+// logs out/destroys session, USER
+router.post('/logout', (req, res, next) => userController.logout(req, res, next))
 
+// deletes a snippet, CRUD
+router.post('/:id/delete', (req, res, next) => crudController.delete(req, res, next))
 
+// render the edit page, CRUD
+router.get('/:id/edit', (req, res, next) => crudController.edit(req, res, next))
 
-/*router.get('/', crudController.index)
-router.get('/log-in', crudController.logInPage) // login page
-router.get('/register', crudController.registerPage) // register page
-router.get('/create', userController.authorize, crudController.create)
-router.get('/read', crudController.read)
-router.get('/:id/edit', crudController.edit) // edit page
-router.post('/:id/update', crudController.update) // the actual update
+// posts the update after edit, CRUD
+router.post('/:id/update', (req, res, next) => crudController.update(req, res, next))
 
-//router.get('/delete', userController.authorize, crudController.delete)
-router.post('/create-new', crudController.createSnippet) // authorize
-router.get('/:id', crudController.getSnippetById)
-//router.get('/:id/remove', crudController.remove)
-router.post('/:id/delete', crudController.delete)
+// renders a specific snippet, CRUD
+router.get('/:id', (req, res, next) => crudController.getSnippetById(req, res, next))
 
-router.post('/logout', userController.logout)
-router.get('/user-home', userController.userPage)
+// post users log-in-form, USER
+//router.post('/login-user', (req, res, next) => userController.authenticate(req, res, next))
 
-router.post('/login-user', userController.authenticate)
-router.post('/new-register', userController.newUser)*/
+// render users snippets, USER
+//router.get('/user-snippets', (req, res, next) => userController.userSnippets(req, res, next))
+
+// posts users registration-form, USER
+//router.post('/new-register', (req, res, next) => userController.newUser(req, res, next))
+
+// render users home page, USER
+//router.get('/user-home', (req, res, next) => userController.userHome(req, res, next))
+
+//router.get('/', crudController.index) // render home page
+
+// render login page
+//router.get('/log-in', (req, res, next) => crudController.logInPage(req, res, next))
+
+// render register page
+//router.get('/register', (req, res, next) => crudController.registerPage(req, res, next))
