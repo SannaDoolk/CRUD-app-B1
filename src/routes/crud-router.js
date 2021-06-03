@@ -13,20 +13,24 @@ router.get('/create', crudController.create)
 // all documents, for everyone
 router.get('/read', (req, res, next) => crudController.read(req, res, next))
 
-// post a created snippet, CRUD
-router.post('/create-new', (req, res, next) => crudController.createSnippet)
+// post a created snippet, for logged in users
+router.post('/create-new', crudController.createSnippet)
 
 // deletes a snippet, check if user is owner, CRUD
-router.post('/:id/delete', (req, res, next) => crudController.delete(req, res, next))
+router.post('/:id/delete', userController.authorize, crudController.delete)
 
 // render the edit page, only if user is owner, CRUD
-router.get('/:id/edit', userController.authorize, (req, res, next) => crudController.edit(req, res, next))
+router.get('/:id/edit', userController.authorize, crudController.edit)
 
 // posts the update after edit, CRUD
-router.post('/:id/update', (req, res, next) => crudController.update(req, res, next))
+router.post('/:id/update', userController.authorize, crudController.update)
 
 // renders a specific snippet, for everyone, CRUD
 router.get('/:id', (req, res, next) => crudController.getSnippetById(req, res, next))
+
+
+
+
 
 // post users log-in-form, USER
 //router.post('/login-user', (req, res, next) => userController.authenticate(req, res, next))

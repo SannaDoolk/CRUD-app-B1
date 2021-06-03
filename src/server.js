@@ -68,6 +68,8 @@ async function main () {
     }
 
     res.locals.username = req.session.username
+    
+
     res.locals.baseURL = baseURL
     next()
   })

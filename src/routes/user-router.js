@@ -5,19 +5,19 @@ export const router = express.Router()
 
 const userController = new UserController()
 
-// render login page
+// render login page, for everyone
 router.get('/log-in', (req, res, next) => userController.logInPage(req, res, next))
 
-// render register page
+// render register page, for everyone
 router.get('/register', (req, res, next) => userController.registerPage(req, res, next))
 
-// logs out/destroys session, USER
+// logs out/destroys session, for logged in
 router.post('/logout', (req, res, next) => userController.logout(req, res, next))
 
-// post users log-in-form, USER
+// post users log-in-form, for everyone
 router.post('/login-user', (req, res, next) => userController.authenticate(req, res, next))
 
-// render users snippets, USER
+// render users snippets, for logged in
 router.get('/user-snippets', (req, res, next) => userController.userSnippets(req, res, next))
 
 // posts users registration-form, USER

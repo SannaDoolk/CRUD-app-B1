@@ -59,7 +59,8 @@ export class CrudController {
       const viewData = {
         codeSnippets: (await CodeSnippet.find({})).map(codeSnippet => ({
           title: codeSnippet.title,
-          id: codeSnippet._id
+          id: codeSnippet._id,
+          owner: codeSnippet.owner
         }))
       }
       res.render('crud/read', { viewData })
@@ -126,6 +127,7 @@ export class CrudController {
 
   async createSnippet (req, res, next) {
     try {
+      console.log('in create new')
       const codeSnippet = new CodeSnippet({
         owner: req.session.username,
         title: req.body.snippetTitle,
@@ -138,7 +140,7 @@ export class CrudController {
         req.session.flash = {
           type: 'success', text: 'Code snippet has been added'
         }
-        res.redirect('./create')
+        res.redirect('..')
 
         console.log('saved code snippet')
       } else {
@@ -156,15 +158,24 @@ export class CrudController {
   async getSnippetById (req, res, next) {
     try {
       console.log('param ' + req.params.id)
-      //const id = req.params.id
       const codeSnippet = await CodeSnippet.findOne({ _id: req.params.id })
-      //const codeSnippet = await CodeSnippet.findById(id)
+
       const viewData = {
         title: codeSnippet.title,
         description: codeSnippet.description,
-        id: codeSnippet._id
+        id: codeSnippet._id,
+        owner: codeSnippet.owner
       }
-      res.render('crud/details', { viewData })
+
+      let isOwner = false
+      if (res.locals.username === codeSnippet.owner) {
+        isOwner = {
+          isOwner: isOwner,
+          username: res.locals.username
+        }
+      }
+
+      res.render('crud/details', { viewData, isOwner })
     } catch (error) {
       res.redirect('..')
       console.log('ERROR IN GETSNIPID')

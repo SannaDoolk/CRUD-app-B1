@@ -2,9 +2,16 @@
 <br>
 {{viewData.description}}
 
+{{#if isOwner}}
 <button><a href="{{viewData.id}}/edit">Edit</a></button>
 
 <form method="post" action="{{viewData.id}}/delete">
 <input type="hidden" name="id" value="{{viewData.id}}">
 <input type="submit" value="Delete">
 </form>
+{{/if}}
+
+
+
+
+

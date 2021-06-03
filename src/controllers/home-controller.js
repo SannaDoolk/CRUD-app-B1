@@ -22,13 +22,22 @@ export class HomeController {
   // Visa home
   async index (req, res, next) {
     try {
+      let loggedIn = false
+      if (res.locals.username !== undefined) {
+        loggedIn = true
+      }
       const viewData = {
         codeSnippets: (await CodeSnippet.find({})).map(codeSnippet => ({
           title: codeSnippet.title,
           id: codeSnippet._id
         }))
       }
-      res.render('home/index', { viewData })
+      const isLoggedIn = {
+        isLoggedIn: loggedIn,
+        username: res.locals.username
+      }
+
+      res.render('home/index', { viewData, isLoggedIn })
     } catch (error) {
       res.redirect('..')
       console.log('error in index')

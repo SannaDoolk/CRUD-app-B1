@@ -6,6 +6,10 @@
 </div>
 -->
 <div id="snippets-container">
+  {{#if isLoggedIn.isLoggedIn}}
+    <p>Logged in as {{isLoggedIn.username}}</p>
+    {{/if}}
+
   <div id="code-snippets">
     {{#if viewData.codeSnippets.length}}
     <ul>
