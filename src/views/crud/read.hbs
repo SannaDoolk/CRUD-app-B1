@@ -2,9 +2,11 @@
 {{#if viewData.codeSnippets.length}}
 <ul>
 {{#each viewData.codeSnippets}}
+<li>
 <a href="../crud/{{this.id}}">
 {{this.title}}
 </a>
+</li>
 <br>
 {{/each}}
 </ul>

@@ -4,26 +4,21 @@ body {
   padding: 20px;
 }
 
+header {
+  margin-bottom: 30px;
+}
+
 h1 a {
   font-size: 50px;
   padding: 0px;
   background-color: rgb(232, 217, 221);
 }
 
-a {
-  text-decoration: none;
-  color: rgb(0, 0, 0);
-  background-color: rgb(199, 195, 190);
-  padding: 10px 20px;
-  margin: 25px 0px;
-  font-size: 20px;
-}
-
 li {
   list-style: none;
 }
 
-#app-links a {
+#user-home-nav a {
   background-color: rgb(199, 195, 190);
   padding: 20px 35px;
   margin: 25px 0px;
@@ -60,15 +55,22 @@ input[type=submit], button {
 }
 
 #flash-messages {
-  background-color: rgb(147, 171, 147);
   color: black;
+  font-weight: bold;
   font-family: 'Courier New', Courier, monospace;
   padding: 20px;
 }
 
+.success {
+  background-color: rgb(147, 171, 147);
+}
+
+.danger {
+  background-color: rgb(227, 119, 119);
+}
+
 #validation {
   color: black;
-  background-color: rgb(227, 119, 119);
   font-family: 'Courier New', Courier, monospace;
   font-weight: bold;
   padding: 20px;
@@ -93,8 +95,43 @@ label {
   border: 0.5px solid black;
 }
 
+a {
+  text-decoration: none;
+  color: rgb(0, 0, 0);
+  background-color: rgb(199, 195, 190);
+  padding: 10px 20px;
+  margin: 25px 0px;
+  font-size: 20px;
+}
+
 #code-snippets {
+  margin: 0px 0px 0px 0px;
+
+}
+
+#code-snippets a {
+  font-size: 20px;
+  display: block;
+  padding: 20px 20px 20px 20px;
+  margin: 0px 10px 0px 0px;
+}
+
+#snippet-title {
   font-size: 25px;
+  margin-bottom: 20px;
+  margin-top: 50px;
+}
+
+#snippet-desc {
+  background-color: white;
+  font-size: 20px;
+  height: auto;
+  width: 650px;
+}
+
+#snippet-desc p {
+  margin: 20px;
+  padding: 30px;
 }
 
 

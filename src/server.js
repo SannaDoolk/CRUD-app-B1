@@ -68,7 +68,6 @@ async function main () {
     }
 
     res.locals.username = req.session.username
-    
 
     res.locals.baseURL = baseURL
     next()
@@ -81,6 +80,17 @@ async function main () {
       res
         .status(404)
         .sendFile(join(directoryFullName, 'views', 'errors', '404.html'))
+    }
+
+    if (err.status === 401) {
+      return res
+        .status(401)
+        .sendFile(join(directoryFullName, 'views', 'errors', '401.html'))
+    }
+    if (err.status === 403) {
+      return res
+        .status(403)
+        .sendFile(join(directoryFullName, 'views', 'errors', '403.html'))
     }
 
     if (req.app.get('env') !== 'development') {

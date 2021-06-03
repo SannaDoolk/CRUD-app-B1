@@ -1,6 +1,7 @@
 
 import { User } from '../models/user.js'
 import { CodeSnippet } from '../models/codeSnippet.js'
+import createHttpError from 'http-errors'
 
 /**
  *
@@ -30,17 +31,20 @@ export class UserController {
       }
       res.redirect('../login/log-in')
     } catch (error) {
-      res.redirect('../login/register', {
-        validationErrors: [error.errors.message]
-
-      //fixa felmeddelande
-      })
+      console.log(error.errors)
+      req.session.flash = {
+        type: 'danger', text: 'YOU DID SOMETHING WRONG, NOT MY PROBLEM'
+      }
+      res.redirect('../login/register')
     }
   }
 
     logout (req, res) {
-      console.log('logged out')
     req.session.destroy()
+
+    req.session.flash = {
+      type: 'success', text: 'Bye!'
+    }
     res.redirect('..')
   }
 
@@ -49,13 +53,15 @@ export class UserController {
       console.log('in authorize')
       console.log(req.params.id)
       console.log(req.session.username)
-      const codeSnippet = await CodeSnippet.findOne({ _id: req.params.id })
-      if (req.session.username !== codeSnippet.owner) {
-        const error = new Error('Forbidden')
-        error.status = 403
-        return next(error) // fixa html
+
+      if (req.session.username === undefined) {
+        return next(createHttpError(404))
       }
 
+      const codeSnippet = await CodeSnippet.findOne({ _id: req.params.id })
+      if (req.session.username !== codeSnippet.owner) {
+        return next(createHttpError(403))
+      }
       next()
     } catch (error) {
 

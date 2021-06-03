@@ -81,7 +81,7 @@ export class CrudController {
       }
       res.render('crud/edit', { viewData })
     } catch (error) {
-      console.log(error)
+
     }
   }
 
@@ -90,38 +90,47 @@ export class CrudController {
       const update = await CodeSnippet.updateOne({ _id: req.body.id }, {
         description: req.body.description
       })
-      res.redirect('../read')
+      req.session.flash = {
+        type: 'success', text: 'Code snippet has been edited'
+      }
+      res.redirect('../read') // borde kanske visa snippeten
     } catch (error) {
-      console.log(error)
+      req.session.flash = {
+        type: 'danger', text: 'Editing went wrong'
+      }
     }
   }
 
   async remove (req, res, next) {
     try {
-    console.log(req.params.id)
+      console.log(req.params.id)
 
-    const codeSnippet = await CodeSnippet.findOne({ _id: req.params.id })
-    console.log(codeSnippet._id)
-    const viewData = {
-      id: codeSnippet._id,
-      description: codeSnippet.description
-    }
-
-    res.render('crud/remove', { viewData })
+      const codeSnippet = await CodeSnippet.findOne({ _id: req.params.id })
+      console.log(codeSnippet._id)
+      const viewData = {
+        id: codeSnippet._id,
+        description: codeSnippet.description
+      }
+      req.session.flash = {
+        type: 'success', text: 'Code snippet has been deleted'
+      }
+      res.render('crud/remove', { viewData })
     } catch (error) {
-      console.log(error)
-    } 
+      req.session.flash = {
+        type: 'danger', text: 'Delete went wrong'
+      }
+    }
   }
 
   async delete (req, res, next) {
     try {
-      console.log('delete ' + req.body.id)
       await CodeSnippet.deleteOne({ _id: req.body.id })
+
       req.session.flash = { type: 'success', text: 'Code snippet was deleted' }
       res.redirect('../read')
- 
     } catch (error) {
-      console.log(error)
+      req.session.flash = { type: 'danger', text: error.message }
+      res.redirect('..')
     }
   }
 
@@ -136,22 +145,15 @@ export class CrudController {
 
       if (req.session.username) {
         await codeSnippet.save()
-
-        req.session.flash = {
-          type: 'success', text: 'Code snippet has been added'
-        }
-        res.redirect('..')
-
-        console.log('saved code snippet')
-      } else {
-        console.log('no session')
       }
+      req.session.flash = {
+        type: 'success', text: 'Code snippet has been added'
+      }
+      res.redirect('..')
     } catch (error) {
       console.log(error.message)
-      req.session.flash = { type: 'danger', text: error.errors.message }
+      req.session.flash = { type: 'danger', text: 'Something went wrong' } // här borde valideringsfel visas
       res.redirect('./create')
-
-        //fixa felmeddelande
     }
   }
 

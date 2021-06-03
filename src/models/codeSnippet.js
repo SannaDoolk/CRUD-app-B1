@@ -15,7 +15,7 @@ const codeSnippetSchema = new mongoose.Schema({
 
   title: {
     type: String,
-    required: true,
+    required: [true, 'You have to provide a name for your code snippet.'],
     minlength: [1, 'You have to provide a name for your code snippet.'],
     maxlength: [100, 'That name is a bit too long.']
   },
@@ -23,7 +23,7 @@ const codeSnippetSchema = new mongoose.Schema({
   description: {
     type: String,
     required: true,
-    minlength: [1, 'You have to write a description.'],
+    minlength: [1, 'You have to provide a description.'],
     maxlength: [4000, 'You have provided too much text.']
   }
 })

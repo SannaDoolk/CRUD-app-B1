@@ -1,7 +1,14 @@
+<div id="snippet-title">
 <b>{{viewData.title}} </b>
-<br>
-{{viewData.description}}
+</div>
 
+<div id="snippet-desc">
+<p>
+{{viewData.description}}
+</p>
+</div>
+
+<div>
 {{#if isOwner}}
 <button><a href="{{viewData.id}}/edit">Edit</a></button>
 
@@ -10,7 +17,7 @@
 <input type="submit" value="Delete">
 </form>
 {{/if}}
-
+</div>
 
 
 
