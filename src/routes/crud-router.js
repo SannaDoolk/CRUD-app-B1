@@ -8,25 +8,25 @@ const crudController = new CrudController()
 const userController = new UserController()
 
 // render form for create, only for logged in
-router.get('/create', crudController.create)
+router.get('/create', userController.isLoggedIn, crudController.create)
 
 // all documents, for everyone
-router.get('/read', (req, res, next) => crudController.read(req, res, next))
+router.get('/read', crudController.read)
 
 // post a created snippet, for logged in users
-router.post('/create-new', crudController.createSnippet)
+router.post('/create-new', userController.isLoggedIn, crudController.createSnippet)
 
 // deletes a snippet, check if user is owner, CRUD
-router.post('/:id/delete', userController.authorize, crudController.delete)
+router.post('/:id/delete', userController.isLoggedIn, userController.isUserOwner, crudController.delete)
 
 // render the edit page, only if user is owner, CRUD
-router.get('/:id/edit', userController.authorize, crudController.edit)
+router.get('/:id/edit', userController.isLoggedIn, userController.isUserOwner, crudController.edit)
 
 // posts the update after edit, CRUD
-router.post('/:id/update', userController.authorize, crudController.update)
+router.post('/:id/update', userController.isLoggedIn, userController.isUserOwner, crudController.update)
 
 // renders a specific snippet, for everyone, CRUD
-router.get('/:id', (req, res, next) => crudController.getSnippetById(req, res, next))
+router.get('/:id', crudController.getSnippetById)
 
 
 

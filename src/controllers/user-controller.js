@@ -41,22 +41,24 @@ export class UserController {
 
     logout (req, res) {
     req.session.destroy()
-
-    req.session.flash = {
-      type: 'success', text: 'Bye!'
-    }
     res.redirect('..')
   }
 
-  async authorize (req, res, next) {
-    try {
-      console.log('in authorize')
-      console.log(req.params.id)
-      console.log(req.session.username)
+  async isLoggedIn (req, res, next) {
+    console.log('checked if user is logged in')
+    if (!req.session.username) {
+      return next(createHttpError(404), 'Page not found')
+    }
+    next()
+  }
 
-      if (req.session.username === undefined) {
+  async isUserOwner (req, res, next) {
+    try {
+      console.log('check if user is owner')
+
+      /*if (req.session.username === undefined) {
         return next(createHttpError(404))
-      }
+      }*/
 
       const codeSnippet = await CodeSnippet.findOne({ _id: req.params.id })
       if (req.session.username !== codeSnippet.owner) {

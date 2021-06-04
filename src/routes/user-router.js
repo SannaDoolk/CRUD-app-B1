@@ -6,23 +6,22 @@ export const router = express.Router()
 const userController = new UserController()
 
 // render login page, for everyone
-router.get('/log-in', (req, res, next) => userController.logInPage(req, res, next))
+router.get('/log-in', userController.logInPage)
 
 // render register page, for everyone
-router.get('/register', (req, res, next) => userController.registerPage(req, res, next))
+router.get('/register', userController.registerPage)
 
 // logs out/destroys session, for logged in
-router.post('/logout', (req, res, next) => userController.logout(req, res, next))
+router.post('/logout', userController.isLoggedIn, userController.logout)
 
 // post users log-in-form, for everyone
-router.post('/login-user', (req, res, next) => userController.authenticate(req, res, next))
+router.post('/login-user', userController.authenticate)
 
 // render users snippets, for logged in
-router.get('/user-snippets', (req, res, next) => userController.userSnippets(req, res, next))
+router.get('/user-snippets', userController.isLoggedIn, userController.userSnippets)
 
 // posts users registration-form, USER
-router.post('/new-register', (req, res, next) => userController.newUser(req, res, next))
+router.post('/new-register', userController.newUser)
 
 // render users home page, USER
-router.get('/user-home', (req, res, next) => userController.userHome(req, res, next))
-
+router.get('/user-home', userController.isLoggedIn, userController.userHome)
