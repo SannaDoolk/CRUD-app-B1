@@ -142,6 +142,7 @@ export class CrudController {
         title: req.body.snippetTitle,
         description: req.body.snippetDescription
       })
+      console.log(codeSnippet.description)
 
       if (req.session.username) {
         await codeSnippet.save()

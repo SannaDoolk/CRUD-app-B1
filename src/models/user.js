@@ -7,21 +7,22 @@
 
 import mongoose from 'mongoose'
 import bcryptjs from 'bcryptjs'
+import createHttpError from 'http-errors'
 
 const userSchema = new mongoose.Schema({
   username: {
     type: String,
-    required: [true, 'A username is required'],
+    required: true,
     minlength: [1, 'A username is required'],
     maxlength: [25, 'The username must not contain more than 25 characters.'],
-    unique: [true, 'Username already taken'],
+    unique: true,
     trim: true
   },
   password: {
     type: String,
     minlength: [10, 'The password must contain at least 10 characters.'],
     maxlength: [1000, 'The password must not contain more than 1000 characters.'],
-    required: [true, 'A password is required!']
+    required: true
   }
 })
 

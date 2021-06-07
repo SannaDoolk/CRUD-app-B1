@@ -3,10 +3,16 @@
   <a href="/">The CRUD application </a>
   </h1>
 
-  <div id="container">
-  <a href="../login/log-in">Log in</a>
-  <a href="../login/register">Register</a>
+  <div id="header-container">
+    <a href="/">Home</a>
+    {{#if username}}
+      <form id="log-out-form" method="post" action="../login/logout">
+      <input type="submit" value="Logout">
+      </form>
+    {{else}}
+      <a href="../login/register">Register</a>
+      <a href="../login/log-in">Log in</a>
+    {{/if}}
   </div>
 
- 
 </header>

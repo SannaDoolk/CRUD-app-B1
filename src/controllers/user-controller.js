@@ -18,28 +18,34 @@ export class UserController {
 
     async newUser (req, res) {
     try {
-      console.log('register user')
       const user = new User({
         username: req.body.username,
         password: req.body.password
       })
-    // save in database
+
       await user.save()
 
       req.session.flash = {
         type: 'success', text: 'You have been registered, please log in'
       }
+
       res.redirect('../login/log-in')
     } catch (error) {
-      console.log(error.errors)
-      req.session.flash = {
-        type: 'danger', text: 'YOU DID SOMETHING WRONG, NOT MY PROBLEM'
+      if (error.code === 11000) {
+        req.session.flash = {
+          type: 'danger', text: 'Username already taken'
+        }
+      } else {
+        req.session.flash = {
+          type: 'danger', text: error.message
+        }
       }
       res.redirect('../login/register')
     }
   }
 
     logout (req, res) {
+    console.log('logged out')
     req.session.destroy()
     res.redirect('..')
   }
@@ -54,11 +60,7 @@ export class UserController {
 
   async isUserOwner (req, res, next) {
     try {
-      console.log('check if user is owner')
-
-      /*if (req.session.username === undefined) {
-        return next(createHttpError(404))
-      }*/
+      console.log('checked if user is owner')
 
       const codeSnippet = await CodeSnippet.findOne({ _id: req.params.id })
       if (req.session.username !== codeSnippet.owner) {
@@ -84,32 +86,33 @@ export class UserController {
       })
     } catch (error) {
       console.log('ERRRO IN AUTH')
+      req.session.flash = {
+        type: 'danger', text: 'Login attempt failed'
+      }
       res.redirect('../log-in')
       //fixa felmeddelande
     }
   }
 
   userHome (req, res, next) {
-    res.render('login/user-home')
+    const username = {
+      username: req.session.username
+    }
+    res.render('login/user-home', { username })
   }
 
   async userSnippets (req, res, next) {
     try {
-      if (req.session.username) {
-        const user = req.session.username
-        const viewData = {
-          codeSnippets: (await CodeSnippet.find({ owner: user })).map(codeSnippet => ({
-            title: codeSnippet.title,
-            id: codeSnippet._id,
-            description: codeSnippet.description,
-            owner: codeSnippet.owner
-          }))
-        }
-        res.render('login/user-snippets', { viewData })
-      } else {
-        console.log('no user logged in')
-        res.redirect('log-in')
+      const user = req.session.username
+      const viewData = {
+        codeSnippets: (await CodeSnippet.find({ owner: user })).map(codeSnippet => ({
+          title: codeSnippet.title,
+          id: codeSnippet._id,
+          description: codeSnippet.description,
+          owner: codeSnippet.owner
+        }))
       }
+      res.render('login/user-snippets', { viewData })
     } catch (error) {
 
     }

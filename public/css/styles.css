@@ -1,11 +1,19 @@
-body {
+html {
   background-color: rgb(232, 217, 221);
   font-family: Georgia, 'Times New Roman', Times, serif;
   padding: 20px;
+  position: relative;
+  margin: auto;
 }
 
 header {
-  margin-bottom: 30px;
+  margin-bottom: 60px;
+  position: sticky;
+}
+
+#header-container form {
+  margin-right: 100px;
+  margin-bottom: 100px;
 }
 
 h1 a {
@@ -22,10 +30,10 @@ li {
   background-color: rgb(199, 195, 190);
   padding: 20px 35px;
   margin: 25px 0px;
-  text-align: center;
-  display: inline-block;
-  font-size: 40px;
+  display: block;
+  font-size: 30px;
 }
+
 
 #log-in-form {
   padding: 20px 35px;
@@ -36,6 +44,7 @@ li {
 #log-in-form input {
   margin-top: 10px;
   margin-bottom: 10px;
+  display: block;
 }
 
 input[type=text], input[type=password] {
@@ -51,7 +60,17 @@ input[type=submit], button {
   border: none;
   margin-top: 20px;
   font-size: 20px;
-  display: block;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  position: fixed;
+}
+
+a {
+  text-decoration: none;
+  color: rgb(0, 0, 0);
+  background-color: rgb(199, 195, 190);
+  padding: 10px 20px;
+  margin: 25px 0px;
+  font-size: 20px;
 }
 
 #flash-messages {
@@ -95,25 +114,17 @@ label {
   border: 0.5px solid black;
 }
 
-a {
-  text-decoration: none;
-  color: rgb(0, 0, 0);
-  background-color: rgb(199, 195, 190);
-  padding: 10px 20px;
-  margin: 25px 0px;
-  font-size: 20px;
-}
-
 #code-snippets {
   margin: 0px 0px 0px 0px;
 
 }
 
-#code-snippets a {
+#code-snippets li a{
   font-size: 20px;
   display: block;
+  max-width: 600px;
   padding: 20px 20px 20px 20px;
-  margin: 0px 10px 0px 0px;
+  margin: 10px 10px 0px 0px;
 }
 
 #snippet-title {
