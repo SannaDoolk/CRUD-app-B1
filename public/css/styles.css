@@ -1,6 +1,96 @@
 html {
   background-color: rgb(232, 217, 221);
   font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+body {
+  max-width: 650px;
+  margin: auto;
+  width: auto;
+  height: auto;
+}
+
+header {
+  border: 5px solid black;
+}
+
+h1 {
+  font-size: 50px;
+  text-align: center;
+}
+
+h2 {
+  font-size: 30px;
+  text-align: center;
+}
+
+#code-snippets-links, #header-container {
+  background-color: rgb(199, 195, 190);
+}
+
+#code-snippets-links {
+  margin-top: 60px;
+}
+
+#header-container {
+  font-size: 30px;
+  display: inline;
+  padding: 25px 20px 25px 20px;
+  border: 5px solid black;
+}
+
+#code-snippets-links li {
+  background-color: beige;
+  font-size: 18px;
+  display: flex;
+  flex-direction: row;
+  padding: 25px 20px 25px 20px;
+  border: 5px solid black;
+  margin-bottom: 30px;
+  
+}
+
+#code-snippets-links {
+  border: 5px solid black;
+}
+
+li {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+input {
+  font-size: 15px;
+  padding: 10px;
+  margin-bottom: 10px;
+  width: 250px;
+}
+
+form input[type=submit] {
+  background-color: rgb(199, 195, 190);
+  display: block;
+  margin-top: 10px;
+  width: 150px;
+  font-size: 20px;
+  border: none;
+}
+
+
+
+/*html {
+  background-color: rgb(232, 217, 221);
+  font-family: Georgia, 'Times New Roman', Times, serif;
   padding: 20px;
   position: relative;
   margin: auto;
@@ -143,7 +233,7 @@ label {
 #snippet-desc p {
   margin: 20px;
   padding: 30px;
-}
+}*/
 
 
 
