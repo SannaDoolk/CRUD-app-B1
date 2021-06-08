@@ -1,5 +1,6 @@
 <h3>{{viewData.title}}</h3>
 
+<div id="edit-form">
 <form method="post" action="../{{viewData.id}}/update">
 <input type="hidden" name="id" value="{{viewData.id}}" />
 
@@ -7,7 +8,8 @@
   {{viewData.description}}
   </textarea>
 
-<input type="submit" value="Update">
+<input type="submit" class="update" value="Update">
 </form>
+</div>
 
  

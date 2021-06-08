@@ -1,5 +1,5 @@
 <div id="snippet-title">
-<b>{{viewData.title}} </b>
+<p>{{viewData.title}} </p>
 </div>
 
 <div id="snippet-desc">
@@ -12,12 +12,15 @@
 
 <div>
 {{#if isOwner}}
-<button><a href="{{viewData.id}}/edit">Edit</a></button>
+<div id="edit">
+<a href="{{viewData.id}}/edit" class="edit">Edit</a>
 
 <form method="post" action="{{viewData.id}}/delete">
 <input type="hidden" name="id" value="{{viewData.id}}">
-<input type="submit" value="Delete">
+<input type="submit" value="Delete" class="delete">
 </form>
+
+</div>
 {{/if}}
 </div>
 

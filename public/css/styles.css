@@ -1,17 +1,21 @@
-html {
-  background-color: rgb(232, 217, 221);
-  font-family: Georgia, 'Times New Roman', Times, serif;
-}
-
 body {
+  background-color: rgb(228, 228, 200);
+  font-family: Georgia, 'Times New Roman', Times, serif;
   max-width: 650px;
   margin: auto;
   width: auto;
   height: auto;
 }
 
-header {
-  border: 5px solid black;
+
+header #header-container li {
+  display: inline-block;
+}
+
+#header-container {
+  font-size: 30px;
+  background-color: rgb(34, 34, 34);
+  display: block;
 }
 
 h1 {
@@ -24,143 +28,126 @@ h2 {
   text-align: center;
 }
 
-#code-snippets-links, #header-container {
-  background-color: rgb(199, 195, 190);
+h3 {
+  text-align: center;
+}
+
+a {
+  color: black;
+  text-decoration: none;
 }
 
 #code-snippets-links {
-  margin-top: 60px;
+  padding: 0;
 }
 
-#header-container {
-  font-size: 30px;
-  display: inline;
-  padding: 25px 20px 25px 20px;
-  border: 5px solid black;
+#snippets-container {
+  margin: 0;
 }
 
-#code-snippets-links li {
-  background-color: beige;
-  font-size: 18px;
-  display: flex;
-  flex-direction: row;
-  padding: 25px 20px 25px 20px;
-  border: 5px solid black;
-  margin-bottom: 30px;
+#code-snippets-links ul {
+  margin: 20px;
+  padding: 0;
   
 }
 
-#code-snippets-links {
-  border: 5px solid black;
+#code-snippets-links li, #user-snippets li {
+  font-size: 30px;
+  padding: 10px 10px 10px 10px;
+  margin: 0;
+  border-bottom: 5px solid rgb(91, 78, 97);
+}
+
+#snippet-title {
+  font-size: 20px;
+  text-align: center;
+  margin-top: 40px;
+}
+
+.logout {
+  margin: 0;
+  padding: 0;
+}
+
+.create-title, .create-desc {
+  font-size: 20px;
+  margin-bottom: 5px;
+}
+
+#snippet-desc {
+  background-color: white;
+  border: 1px solid black;
+  overflow: scroll;
 }
 
 li {
   list-style: none;
 }
 
-a {
-  text-decoration: none;
-  color: black;
+.home, .login, .register, .logout, .edit, .delete, .update, .user {
+  background-color: rgb(91, 78, 97);
+  padding: 20px 40px 20px 40px;
+  font-size: 20px;
+  display: inline-block;
+  border: none;
+  cursor: pointer;
 }
 
-form {
+.home {
+  background-color: rgb(159, 216, 216) !important;
+}
+
+.register, .user {
+  background-color: rgb(73, 131, 131);
+}
+
+.login, .logout {
+  background-color: rgb(194, 110, 85);
+}
+
+#log-out-form input[type=submit] {
+ font-family: Georgia, 'Times New Roman', Times, serif;
+ border: none;
+}
+
+#log-in form, #register form, #create form, #edit-form form {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
 
-input {
+#log-in input, #register input, #create input {
   font-size: 15px;
   padding: 10px;
   margin-bottom: 10px;
   width: 250px;
 }
 
-form input[type=submit] {
-  background-color: rgb(199, 195, 190);
+#log-in input[type=submit], 
+#register input[type=submit],
+#create input[type=submit] {
+  background-color: rgb(91, 78, 97);
   display: block;
   margin-top: 10px;
   width: 150px;
   font-size: 20px;
   border: none;
-}
-
-
-
-/*html {
-  background-color: rgb(232, 217, 221);
   font-family: Georgia, 'Times New Roman', Times, serif;
-  padding: 20px;
-  position: relative;
-  margin: auto;
-}
-
-header {
-  margin-bottom: 60px;
-  position: sticky;
-}
-
-#header-container form {
-  margin-right: 100px;
-  margin-bottom: 100px;
-}
-
-h1 a {
-  font-size: 50px;
-  padding: 0px;
-  background-color: rgb(232, 217, 221);
-}
-
-li {
-  list-style: none;
 }
 
 #user-home-nav a {
-  background-color: rgb(199, 195, 190);
-  padding: 20px 35px;
-  margin: 25px 0px;
-  display: block;
   font-size: 30px;
-}
-
-
-#log-in-form {
-  padding: 20px 35px;
-  margin: 25px 0px;
-  font-size: 20px;
-}
-
-#log-in-form input {
-  margin-top: 10px;
-  margin-bottom: 10px;
+  background-color: rgb(91, 78, 97);
+  padding: 20px 40px 20px 40px;
+  margin-bottom: 30px;
   display: block;
 }
 
-input[type=text], input[type=password] {
-  border: 3px solid black;
-  border-radius: 3px;
-  width: 50%;
-  padding: 8px;
-}
-
-input[type=submit], button {
-  background-color: rgb(199, 195, 190);
-  padding: 10px 20px;
-  border: none;
-  margin-top: 20px;
-  font-size: 20px;
+.edit, .delete, .update {
+  margin-top: 10px;
+  cursor: pointer;
   font-family: Georgia, 'Times New Roman', Times, serif;
-  position: fixed;
-}
-
-a {
-  text-decoration: none;
-  color: rgb(0, 0, 0);
-  background-color: rgb(199, 195, 190);
-  padding: 10px 20px;
-  margin: 25px 0px;
-  font-size: 20px;
 }
 
 #flash-messages {
@@ -186,54 +173,11 @@ a {
   list-style: none;
 }
 
-#create input[type=submit] {
-  padding: 10px 20px;
-  border: 3px solid black;
-  margin-top: 20px;
-  border-radius: 3px;
-  font-size: 20px;
-  display: block;
-}
 
-label {
-  padding: 5px;
-  display: block;
-}
 
-#create input[type="text"] {
-  border: 0.5px solid black;
-}
 
-#code-snippets {
-  margin: 0px 0px 0px 0px;
 
-}
 
-#code-snippets li a{
-  font-size: 20px;
-  display: block;
-  max-width: 600px;
-  padding: 20px 20px 20px 20px;
-  margin: 10px 10px 0px 0px;
-}
-
-#snippet-title {
-  font-size: 25px;
-  margin-bottom: 20px;
-  margin-top: 50px;
-}
-
-#snippet-desc {
-  background-color: white;
-  font-size: 20px;
-  height: auto;
-  width: 650px;
-}
-
-#snippet-desc p {
-  margin: 20px;
-  padding: 30px;
-}*/
 
 
 

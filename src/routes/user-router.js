@@ -24,4 +24,4 @@ router.get('/user-snippets', userController.isLoggedIn, userController.userSnipp
 router.post('/new-register', userController.newUser)
 
 // render users home page, USER
-router.get('/user-home', userController.isLoggedIn, userController.userHome)
+router.get('/user-home', /*userController.isLoggedIn,*/ userController.userHome)
