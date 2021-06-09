@@ -167,10 +167,12 @@ li {
   background-color: rgb(212, 74, 74);
 }
 
-#validation {
+#validation li {
+  background-color: rgb(212, 74, 74);
   color: black;
   font-family: 'Courier New', Courier, monospace;
   font-weight: bold;
   padding: 20px;
   list-style: none;
+  margin-bottom: 5px;
 }

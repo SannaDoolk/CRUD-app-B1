@@ -7,17 +7,17 @@
     
         {{#if username}}
         <ul>
-          <li><a class="home" href="/">Home</a></li>
-          <li><a class="user" href="../login/user-home">Your page</a></li>
-          <li><form id="log-out-form" method="post" action="../login/logout">
+          <li><a class="home" href="./">Home</a></li>
+          <li><a class="user" href="./login/user-home">Your page</a></li>
+          <li><form id="log-out-form" method="post" action="./login/logout">
           <input type="submit" class="logout" value="Sign out">
           </form></li>
         </ul>
         {{else}}
         <ul>
-          <li><a class="home" href="/">Home</a></li>
-          <li><a class="register"href="../login/register">Register</a></li>
-          <li><a class="login" href="../login/log-in">Log in</a></li>
+          <li><a class="home" href="./">Home</a></li>
+          <li><a class="register"href="./login/register">Register</a></li>
+          <li><a class="login" href="./login/log-in">Log in</a></li>
         </ul>
         {{/if}}
 

@@ -18,18 +18,16 @@ import { connectDB } from './config/mongoose.js'
 async function main () {
   await connectDB()
 
-// Create express application
   const app = express()
 
-// Get the directory name of this module's path.
   const directoryFullName = dirname(fileURLToPath(import.meta.url))
 
   const baseURL = process.env.BASE_URL || '/'
 
   app.use(helmet())
-// Morgan
+
   app.use(logger('dev'))
-// View Engine
+
   app.engine('hbs', hbs.express4({
     defaultLayout: join(directoryFullName, 'views', 'layouts', 'default'),
     partialsDir: join(directoryFullName, 'views', 'partials')
@@ -39,7 +37,6 @@ async function main () {
 
   app.use(express.urlencoded({ extended: false }))
 
-// Static files
   app.use(express.static(join(directoryFullName, '..', 'public')))
 
   const sessionOptions = {
@@ -68,8 +65,8 @@ async function main () {
     }
 
     res.locals.username = req.session.username
-
     res.locals.baseURL = baseURL
+
     next()
   })
 
@@ -77,11 +74,10 @@ async function main () {
 
   app.use(function (err, req, res, next) {
     if (err.status === 404) {
-      res
+      return res
         .status(404)
         .sendFile(join(directoryFullName, 'views', 'errors', '404.html'))
     }
-
     if (err.status === 401) {
       return res
         .status(401)

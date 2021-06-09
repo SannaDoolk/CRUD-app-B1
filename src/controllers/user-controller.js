@@ -1,3 +1,9 @@
+/**
+ * Module for the user-controller.
+ *
+ * @author Sanna Doolk
+ * @version 1.0.0
+ */
 
 import { User } from '../models/user.js'
 import { CodeSnippet } from '../models/codeSnippet.js'
@@ -38,12 +44,18 @@ export class UserController {
         req.session.flash = {
           type: 'danger', text: 'Username already taken'
         }
-      } else {
-        req.session.flash = {
-          type: 'danger', text: error.message
-        } // Fixa felmeddelande
       }
-      res.redirect('../login/register')
+      if (error.name === 'ValidationError') {
+        const errors = []
+        for (const key in error.errors) {
+          errors.push(error.errors[key].message)
+        }
+        res.render('login/register', {
+          validationErrors: errors
+        })
+      } else {
+        res.redirect('../login/register')
+      }
     }
   }
 
@@ -172,7 +184,6 @@ export class UserController {
    * @param {object} res - Express request object.
    */
   logout (req, res) {
-    console.log('logged out')
     req.session.destroy()
     res.redirect('..')
   }

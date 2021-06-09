@@ -13,9 +13,9 @@
 <div>
 {{#if isOwner}}
 <div id="edit">
-<a href="{{viewData.id}}/edit" class="edit">Edit</a>
+<a href="crud/{{viewData.id}}/edit" class="edit">Edit</a>
 
-<form method="post" action="{{viewData.id}}/delete">
+<form method="post" action="./crud/{{viewData.id}}/delete">
 <input type="hidden" name="id" value="{{viewData.id}}">
 <input type="submit" value="Delete" class="delete">
 </form>
