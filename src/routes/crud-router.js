@@ -27,27 +27,3 @@ router.post('/:id/update', userController.isLoggedIn, userController.isUserOwner
 
 // renders a specific snippet, for everyone, CRUD
 router.get('/:id', crudController.getSnippetById)
-
-
-
-
-
-// post users log-in-form, USER
-//router.post('/login-user', (req, res, next) => userController.authenticate(req, res, next))
-
-// render users snippets, USER
-//router.get('/user-snippets', (req, res, next) => userController.userSnippets(req, res, next))
-
-// posts users registration-form, USER
-//router.post('/new-register', (req, res, next) => userController.newUser(req, res, next))
-
-// render users home page, USER
-//router.get('/user-home', (req, res, next) => userController.userHome(req, res, next))
-
-//router.get('/', crudController.index) // render home page
-
-// render login page
-//router.get('/log-in', (req, res, next) => crudController.logInPage(req, res, next))
-
-// render register page
-//router.get('/register', (req, res, next) => crudController.registerPage(req, res, next))

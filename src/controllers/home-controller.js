@@ -5,7 +5,6 @@
  * @version 1.0.0
  */
 
-import { User } from '../models/user.js'
 import { CodeSnippet } from '../models/codeSnippet.js'
 
 /**
@@ -19,7 +18,14 @@ export class HomeController {
  * @param {object} res - Express response object.
  */
 
-  // Visa home
+  /**
+   * Renders the index page.
+   *
+   * @param {object} req - Express request object.
+   * @param {object} res - Express request object.
+   * @param {Function} next - Express next middleware function.
+   * @returns {} The next middleware function.
+   */
   async index (req, res, next) {
     try {
       let loggedIn = false
@@ -40,7 +46,6 @@ export class HomeController {
       res.render('home/index', { viewData, isLoggedIn })
     } catch (error) {
       res.redirect('..')
-      console.log('error in index')
     }
   }
 }

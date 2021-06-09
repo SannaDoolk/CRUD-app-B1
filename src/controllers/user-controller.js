@@ -32,7 +32,6 @@ export class UserController {
       req.session.flash = {
         type: 'success', text: 'You have been registered, please log in'
       }
-
       res.redirect('../login/log-in')
     } catch (error) {
       if (error.code === 11000) {
@@ -42,18 +41,20 @@ export class UserController {
       } else {
         req.session.flash = {
           type: 'danger', text: error.message
-        }
+        } // Fixa felmeddelande
       }
       res.redirect('../login/register')
     }
   }
 
-    logout (req, res) {
-    console.log('logged out')
-    req.session.destroy()
-    res.redirect('..')
-  }
-
+  /**
+   * Checks if a user is logged in.
+   *
+   * @param {object} req - Express request object.
+   * @param {object} res - Express request object.
+   * @param {Function} next - Express next middleware function.
+   * @returns {} The next middleware function.
+   */
   async isLoggedIn (req, res, next) {
     console.log('checked if user is logged in')
     if (!req.session.username) {
@@ -62,21 +63,32 @@ export class UserController {
     next()
   }
 
+  /**
+   * Checks if a user is the owener of a snippet.
+   *
+   * @param {object} req - Express request object.
+   * @param {object} res - Express request object.
+   * @param {Function} next - Express next middleware function.
+   * @returns {} The next middleware function.
+   */
   async isUserOwner (req, res, next) {
-    try {
-      console.log('checked if user is owner')
+    console.log('checked if user is owner')
 
-      const codeSnippet = await CodeSnippet.findOne({ _id: req.params.id })
-      if (req.session.username !== codeSnippet.owner) {
-        return next(createHttpError(403))
-      }
-      next()
-    } catch (error) {
-
+    const codeSnippet = await CodeSnippet.findOne({ _id: req.params.id })
+    if (req.session.username !== codeSnippet.owner) {
+      return next(createHttpError(403))
     }
+    next()
   }
 
- // Kollar om username och password matchar och genererar session cookie
+  /**
+   * Authenticates a user.
+   *
+   * @param {object} req - Express request object.
+   * @param {object} res - Express request object.
+   * @param {Function} next - Express next middleware function.
+   * @returns {} The next middleware function.
+   */
   async authenticate (req, res, next) {
     try {
       console.log('auth')
@@ -97,14 +109,26 @@ export class UserController {
     }
   }
 
-  userHome (req, res, next) {
+  /**
+   * Renders a users user page.
+   *
+   * @param {object} req - Express request object.
+   * @param {object} res - Express request object.
+   */
+  userHome (req, res) {
     const username = {
       username: req.session.username
     }
     res.render('login/user-home', { username })
   }
 
-  async userSnippets (req, res, next) {
+  /**
+   * Renders a users code snippets page.
+   *
+   * @param {object} req - Express request object.
+   * @param {object} res - Express request object.
+   */
+  async userSnippets (req, res) {
     try {
       const user = req.session.username
       const viewData = {
@@ -117,17 +141,39 @@ export class UserController {
       }
       res.render('login/user-snippets', { viewData })
     } catch (error) {
-
+      res.redirect('..')
     }
   }
 
-  // Visa login-sida
-    logInPage (req, res) {
+  /**
+   * Renders the log in page.
+   *
+   * @param {object} req - Express request object.
+   * @param {object} res - Express request object.
+   */
+  logInPage (req, res) {
     res.render('login/log-in')
   }
 
-  // Visa register-sida
-    registerPage (req, res) {
+  /**
+   * Renders the register page.
+   *
+   * @param {object} req - Express request object.
+   * @param {object} res - Express request object.
+   */
+  registerPage (req, res) {
     res.render('login/register')
+  }
+
+  /**
+   * Log out user.
+   *
+   * @param {object} req - Express request object.
+   * @param {object} res - Express request object.
+   */
+  logout (req, res) {
+    console.log('logged out')
+    req.session.destroy()
+    res.redirect('..')
   }
 }
