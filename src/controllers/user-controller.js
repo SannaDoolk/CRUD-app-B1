@@ -13,10 +13,14 @@ export class UserController {
    * @param {object} req - Express request object.
    * @param {object} res - Express response object.
    */
-  
-    // GLÖM EJ GÖRA ASYNC
 
-    async newUser (req, res) {
+  /**
+   * Creates and saves a new user to the database.
+   *
+   * @param {object} req - Express request object.
+   * @param {object} res - Express request object.
+   */
+  async newUser (req, res) {
     try {
       const user = new User({
         username: req.body.username,
@@ -89,8 +93,7 @@ export class UserController {
       req.session.flash = {
         type: 'danger', text: 'Login attempt failed'
       }
-      res.redirect('../log-in')
-      //fixa felmeddelande
+      res.redirect('./log-in')
     }
   }
 

@@ -146,6 +146,7 @@ li {
 
 .edit, .delete, .update {
   margin-top: 10px;
+  margin-bottom: 10px;
   cursor: pointer;
   font-family: Georgia, 'Times New Roman', Times, serif;
 }
@@ -155,6 +156,7 @@ li {
   font-weight: bold;
   font-family: 'Courier New', Courier, monospace;
   padding: 20px;
+  text-align: center;
 }
 
 .success {
@@ -162,7 +164,7 @@ li {
 }
 
 .danger {
-  background-color: rgb(227, 119, 119);
+  background-color: rgb(212, 74, 74);
 }
 
 #validation {
@@ -172,12 +174,3 @@ li {
   padding: 20px;
   list-style: none;
 }
-
-
-
-
-
-
-
-
-
