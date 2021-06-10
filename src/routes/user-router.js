@@ -1,3 +1,10 @@
+/**
+ * User routers.
+ *
+ * @author Sanna Doolk
+ * @version 1.0.0
+ */
+
 import express from 'express'
 import { UserController } from '../controllers/user-controller.js'
 

@@ -15,6 +15,9 @@ import { fileURLToPath } from 'url'
 import { router } from './routes/router.js'
 import { connectDB } from './config/mongoose.js'
 
+/**
+ * The main function of the application.
+ */
 async function main () {
   await connectDB()
 
@@ -106,4 +109,4 @@ async function main () {
   })
 }
 
-main()
+main().catch(console.error)

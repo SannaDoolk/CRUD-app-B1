@@ -1,5 +1,5 @@
 /**
- * Model for a new snippet.
+ * Mongoose model for a new snippet.
  *
  * @author Sanna Doolk
  * @version 1.0.0

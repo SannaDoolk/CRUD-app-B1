@@ -1,5 +1,5 @@
 /**
- * Model for a new user.
+ * Mongoose model for a new user.
  *
  * @author Sanna Doolk
  * @version 1.0.0
@@ -31,9 +31,11 @@ userSchema.pre('save', async function () {
 })
 
 /**
- * 
- * @param 
- * @param
+ * Checks if a user exists and if password matches the saved hashed password.
+ *
+ * @param {string} username - The username.
+ * @param {string} password - The password.
+ * @returns {object} - The user.
  */
 userSchema.statics.authenticate = async function (username, password) {
   const user = await this.findOne({ username })

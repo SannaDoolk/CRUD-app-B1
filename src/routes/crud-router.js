@@ -1,3 +1,10 @@
+/**
+ * Crud routers.
+ *
+ * @author Sanna Doolk
+ * @version 1.0.0
+ */
+
 import express from 'express'
 import { CrudController } from '../controllers/crud-controller.js'
 import { UserController } from '../controllers/user-controller.js'

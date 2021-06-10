@@ -65,7 +65,7 @@ export class UserController {
    * @param {object} req - Express request object.
    * @param {object} res - Express request object.
    * @param {Function} next - Express next middleware function.
-   * @returns {} The next middleware function.
+   * @returns {Error} 404 error.
    */
   async isLoggedIn (req, res, next) {
     console.log('checked if user is logged in')
@@ -81,7 +81,7 @@ export class UserController {
    * @param {object} req - Express request object.
    * @param {object} res - Express request object.
    * @param {Function} next - Express next middleware function.
-   * @returns {} The next middleware function.
+   * @returns {Error} 403 error.
    */
   async isUserOwner (req, res, next) {
     console.log('checked if user is owner')
@@ -98,12 +98,9 @@ export class UserController {
    *
    * @param {object} req - Express request object.
    * @param {object} res - Express request object.
-   * @param {Function} next - Express next middleware function.
-   * @returns {} The next middleware function.
    */
-  async authenticate (req, res, next) {
+  async authenticate (req, res) {
     try {
-      console.log('auth')
       const user = await User.authenticate(req.body.username, req.body.password)
       req.session.regenerate(() => {
         req.session.loggedIn = true
@@ -113,7 +110,6 @@ export class UserController {
         res.redirect('../login/user-home')
       })
     } catch (error) {
-      console.log('ERRRO IN AUTH')
       req.session.flash = {
         type: 'danger', text: 'Login attempt failed'
       }
