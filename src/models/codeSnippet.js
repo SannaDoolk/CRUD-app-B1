@@ -23,8 +23,7 @@ const codeSnippetSchema = new mongoose.Schema({
   description: {
     type: String,
     required: true,
-    minlength: [1, 'You have to provide a description.'],
-    maxlength: [4000, 'You have provided too much text.']
+    maxlength: 10000
   }
 })
 

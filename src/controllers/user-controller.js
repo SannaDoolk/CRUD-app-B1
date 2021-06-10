@@ -111,7 +111,7 @@ export class UserController {
       })
     } catch (error) {
       req.session.flash = {
-        type: 'danger', text: 'Login attempt failed'
+        type: 'danger', text: 'Incorrect username or password'
       }
       res.redirect('./log-in')
     }

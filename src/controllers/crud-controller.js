@@ -146,6 +146,7 @@ export class CrudController {
    */
   async createSnippet (req, res) {
     try {
+      console.log(req.body.description)
       const codeSnippet = new CodeSnippet({
         owner: req.session.username,
         title: req.body.snippetTitle,
@@ -160,8 +161,7 @@ export class CrudController {
       }
       res.redirect('..')
     } catch (error) {
-      console.log(error.message)
-      req.session.flash = { type: 'danger', text: 'Something went wrong' } // här borde valideringsfel visas
+      req.session.flash = { type: 'danger', text: 'Something went wrong' }
       res.redirect('./create')
     }
   }
