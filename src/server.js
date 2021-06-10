@@ -97,7 +97,6 @@ async function main () {
         .status(500)
         .sendFile(join(directoryFullName, 'views', 'errors', '500.html'))
     }
-
     res
       .status(err.status || 500)
       .render('errors/error', { error: err })

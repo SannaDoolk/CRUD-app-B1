@@ -23,10 +23,8 @@ export class HomeController {
    *
    * @param {object} req - Express request object.
    * @param {object} res - Express request object.
-   * @param {Function} next - Express next middleware function.
-   * @returns {} The next middleware function.
    */
-  async index (req, res, next) {
+  async index (req, res) {
     try {
       let loggedIn = false
       if (res.locals.username !== undefined) {
