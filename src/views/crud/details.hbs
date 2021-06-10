@@ -1,27 +1,36 @@
 <div id="snippet-title">
-<p>{{viewData.title}} </p>
+  <p>{{viewData.title}} </p>
 </div>
 
 <div id="snippet-desc">
-<pre>
-<code>
-{{viewData.description}}
-</code>
-</pre>
+  <pre>
+    <code>
+      {{viewData.description}}
+    </code>
+  </pre>
 </div>
 
 <div>
-{{#if isOwner}}
-<div id="edit">
-<a href="crud/{{viewData.id}}/edit" class="edit">Edit</a>
+  {{#if isOwner}}
+    <p>Created by you</p>
+  {{else}}
+    <p>Created by {{viewData.owner}}</p>
+  {{/if}} 
+</div>
 
-<form method="post" action="./crud/{{viewData.id}}/delete">
-<input type="hidden" name="id" value="{{viewData.id}}">
-<input type="submit" value="Delete" class="delete">
-</form>
+<!-- Only show edit and delete buttons if the user viewing the code snippet is also the owner of it. -->
+<div>
+  {{#if isOwner}}
+    <div id="edit">
+      <a href="crud/{{viewData.id}}/edit" class="edit">Edit</a>
+
+    <form method="post" action="./crud/{{viewData.id}}/delete">
+      <input type="hidden" name="id" value="{{viewData.id}}">
+      <input type="submit" value="Delete" class="delete">
+    </form>
 
 </div>
-{{/if}}
+    {{/if}}
 </div>
 
 

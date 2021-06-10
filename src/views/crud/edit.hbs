@@ -1,15 +1,15 @@
 <h3>{{viewData.title}}</h3>
 
-<div id="edit-form">
-<form method="post" action="./crud/{{viewData.id}}/update">
-<input type="hidden" name="id" value="{{viewData.id}}" />
+  <div id="edit-form">
+    <form method="post" action="./crud/{{viewData.id}}/update">
+      <input type="hidden" name="id" value="{{viewData.id}}" />
 
-<textarea id="snippet-description" name="description" value="{{viewData.description}}" rows="4" cols="50">
-  {{viewData.description}}
-  </textarea>
+      <textarea id="snippet-description" name="description" value="{{viewData.description}}" rows="4" cols="50">
+        {{viewData.description}}
+      </textarea>
 
-<input type="submit" class="update" value="Update">
-</form>
-</div>
+      <input type="submit" class="update" value="Update">
+    </form>
+  </div>
 
  
