@@ -10,16 +10,9 @@ import { CodeSnippet } from '../models/codeSnippet.js'
 import createHttpError from 'http-errors'
 
 /**
- *
+ * Encapsulates a controller.
  */
 export class UserController {
-  /**
-   * .
-   *
-   * @param {object} req - Express request object.
-   * @param {object} res - Express response object.
-   */
-
   /**
    * Creates and saves a new user to the database.
    *

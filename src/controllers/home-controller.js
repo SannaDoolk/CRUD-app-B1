@@ -8,16 +8,9 @@
 import { CodeSnippet } from '../models/codeSnippet.js'
 
 /**
- *
+ * Encapsulates a controller.
  */
 export class HomeController {
-/**
- * .
- *
- * @param {object} req - Express request object.
- * @param {object} res - Express response object.
- */
-
   /**
    * Renders the index page.
    *
